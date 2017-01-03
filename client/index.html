@@ -25,7 +25,7 @@
 
   <!-- Core Scripts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="scripts/deps/underscore-min.js"></script>
+  <script src="scripts/deps/restful.standalone.min.js"></script>
   <script src="scripts/deps/jquery-3.1.1.min.js"></script>
   <script src="scripts/deps/handlebars.min.js"></script>
   <script src="scripts/deps/handlebars.runtime.min.js"></script>
@@ -50,30 +50,31 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container">
   <div class="row">
-    <div class="ten columns" style="margin-top: 5%">
+    <div class="twelve columns" style="margin-top: 5%">
 <h1>Eclipse Fleet Tracker</h1>
 <hr>
 </div>
 </div>
 <div class="row">
-  <div class="two columns">
+  <div class="three columns">
     <button id="button-main" class="u-full-width">Main</button>
   </div>
-  <div class="two columns">
+  <div class="three columns">
     <button id="button-add" class="u-full-width">New Fleet</button>
   </div>
-  <div class="two columns">
+  <div class="three columns">
     <button id="button-view" class="u-full-width">Fleets</button>
   </div>
-  <div class="two columns">
+  <div class="three columns">
     <button id="button-members" class="u-full-width">Members</button>
   </div>
 </div>
 </div>
-<div class="container" style="margin-top: 5%">
+<div class="container" id="content-div" style="margin-top: 5%">
 <!-- BODY -->
-<div id="content-div"></div>
+<h4>Loading site data...</h4>
 </div>
+<div id="load-div" hidden></div>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "collections": "^5.0.6",
+    "crypto": "0.0.3",
     "pg": "^6.1.2",
     "require": "^2.4.20",
     "restify": "^4.3.0"

@@ -1,0 +1,40 @@
+<div class="row">
+    <h4>Add a New Fleet</h4>
+</div>
+<div class="row">
+    <div class="four columns">
+        <label for="fcNameInput">FC Character Name</label>
+        <input class="u-full-width" type="text" placeholder="FC Name" id="fcNameInput">
+    </div>
+    <div class="four columns">
+        <label for="fleetTitleInput">Fleet Name</label>
+        <input class="u-full-width" type="text" placeholder="Fleet Name" id="fleetTitleInput">
+    </div>
+    <div class="four columns">
+        <label for="fleetImportanceInput">Fleet Catagory</label>
+        <select class="u-full-width" type="text" placeholder="Fleet Name" id="fleetImportanceInput">
+            <option value="-1">Select Catagory</option>
+            <option value="0">Strat Op</option>
+            <option value="1">Offensive Fleet</option>
+            <option value="2">Defense Fleet</option>
+            <option value="3">Roam</option>
+            <option value="4">PVE</option>
+            <option value="4">Indy</option>
+            <option value="5">Standing Fleet</option>
+            <option value="6">Other</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="twelve columns">
+        <label for="fleetDescriptionInput">Fleet Description</label>
+        <textarea class="u-full-width" type="text" placeholder="Description" id="fleetDescriptionInput"></textarea>
+    </div>
+</div>
+<div class="row">
+    <div class="twelve columns">
+        <label for="fleetMembersInput">Fleet Members</label>
+        <textarea class="u-full-width" type="text" placeholder="Copy and paste the fleet chat window user list. You may later update the fleet if attendance changes."
+            id="fleetMembersInput"></textarea>
+    </div>
+</div>
