@@ -26,15 +26,15 @@
     </div>
 </div>
 <div class="row">
-    <div class="twelve columns">
+    <div class="six columns" style="height:100%;">
         <label for="fleetDescriptionInput">Fleet Description</label>
-        <textarea class="u-full-width" type="text" placeholder="Description" id="fleetDescriptionInput"></textarea>
+        <textarea style="resize:none; min-height:260px; margin-bottom:26px;" class="u-full-width" type="text" placeholder="Description" id="fleetDescriptionInput"></textarea>
+            <hr>
+        <button id="submit-fleet-add-button" style="margin-bottom:1.5rem;";><h5>Submit</h5></button>
     </div>
-</div>
-<div class="row">
-    <div class="twelve columns">
+    <div class="six columns">
         <label for="fleetMembersInput">Fleet Members</label>
         <textarea class="u-full-width" type="text" placeholder="Copy and paste the fleet chat window user list. You may later update the fleet if attendance changes."
-            id="fleetMembersInput"></textarea>
+            id="fleetMembersInput" style="resize:none; min-height:390px;"></textarea>
     </div>
 </div>
