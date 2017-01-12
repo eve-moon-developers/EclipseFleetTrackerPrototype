@@ -1,4 +1,6 @@
 var pg = require('pg');
+var restify = require('restify');
+var util = require('util');
 
 module.exports.bootstrap_pg = function (callback) {
     console.log("Bootstrapping database.");
@@ -38,4 +40,30 @@ module.exports.bootstrap_pg = function (callback) {
             }
         });
     });
+
+    global.fleettool.pg.restQuery = function(query, req, res, next, callback) {
+        var ft = global.fleettool;
+        console.log("Running query: ");
+        console.log(query);
+        ft.pg.pool.connect(function (err, client, done) {
+            if (err) {
+                next(new restify.InternalServerError('error fetching client from pool', err));
+            }
+
+            console.log("Client fetched.");
+
+            client.query(query, function (err, result) {
+                //call `done()` to release the client back to the pool 
+                done();
+
+                if (err) {
+                    next(new restify.InternalServerError('Internal query error. Check console.'));
+                    console.log("Query Error: ");
+                    console.log(util.inspect(err));
+                } else {
+                    return callback(result, req, res, next);
+                }
+            });
+        });
+    }
 }

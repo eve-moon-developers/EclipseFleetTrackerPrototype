@@ -6,9 +6,12 @@
   "dependencies": {
     "collections": "^5.0.6",
     "crypto": "0.0.3",
+    "libsodium": "^0.4.8",
     "pg": "^6.1.2",
     "require": "^2.4.20",
-    "restify": "^4.3.0"
+    "restify": "^4.3.0",
+    "util": "^0.10.3",
+    "utils": "^0.3.1"
   },
   "devDependencies": {},
   "scripts": {

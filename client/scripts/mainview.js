@@ -1,4 +1,14 @@
 function loadmain() {
     nav.button_main.prop("disabled", true);
-    content_div.html("<h4>Main Page Selected</h4><p>This will later contain a summary of recent fleets and member leaderboards.</p>");
+    
+    if (templates.main) {
+        content_div.html(templates.main);
+    } else {
+        content_div.html("<h4>Loading data...</h4>");
+        load_div.load("templates/main.template", function (data) {
+            console.log("Loaded main template: \n" + data);
+            templates.main = data;
+            loadmain();
+        });
+    }
 }

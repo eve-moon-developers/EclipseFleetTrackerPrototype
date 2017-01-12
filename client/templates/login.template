@@ -12,5 +12,5 @@
     </div>
 </div>
 <div class="row">
-    <button class="u-pull-right three columns" id="submit-login-button">Submit</button>
+    <button type="submit" class="u-pull-right three columns" id="submit-login-button">Submit</button>
 </div>

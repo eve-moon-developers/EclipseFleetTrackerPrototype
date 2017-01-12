@@ -3,7 +3,7 @@ function loadadd() {
     if (templates.addfleet) {
         content_div.html(templates.addfleet);
 
-        $("#submit-fleet-button").click(function () { tryAddFleet(); })
+        $("#submit-fleet-add-button").click(function () { tryAddFleet(); })
 
     } else {
         content_div.html("<h4>Loading data...</h4>");
@@ -16,5 +16,13 @@ function loadadd() {
 }
 
 function tryAddFleet() {
-
+    var package = {};
+    package.FC = $("#fcNameInput").val();
+    package.Title = $("#fleetTitleInput").val();
+    package.Importance = $("#fleetImportanceInput").val();
+    package.Description = escape($("#fleetDescriptionInput").val());
+    package.Members = $("#fleetMembersInput").val();
+    $.post("/api/fleet/add", package, function(data) {
+        console.log(data);
+    });
 }

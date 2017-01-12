@@ -1,0 +1,18 @@
+<h4>Eclipse Fleet Tracker Home</h4>
+<p>Welcome to the fleet tracker home. This is currently in development, with more details to follow.</p>
+<h5>Steps to create and track a fleet:</h5>
+<ul>
+    <li>Go to the submit page, and fill in the fleet details.</li>
+    <li>Once the fleet is active, add a member checkpoint to the fleet.</li>
+    <li>It is worthwhile to have a secondary individual incharge of the fleet tracker rather than the FC.</li>
+    <li>At major events within the fleet, add a new member checkpoint by updating the fleet.</li>
+</ul>
+
+<h5>This page will later be replaced with several lists, for example:</h5>
+<ul>
+    <li>Most recent fleets</li>
+    <li>Most successful fleets in recent time</li>
+    <li>Most successful FCs</li>
+    <li>Most successful members</li>
+    <li>Most valuable kills</li>
+</ul>

@@ -30,7 +30,7 @@
         <label for="fleetDescriptionInput">Fleet Description</label>
         <textarea style="resize:none; min-height:260px; margin-bottom:26px;" class="u-full-width" type="text" placeholder="Description" id="fleetDescriptionInput"></textarea>
             <hr>
-        <button id="submit-fleet-add-button" style="margin-bottom:1.5rem;";><h5>Submit</h5></button>
+        <button id="submit-fleet-add-button" type="submit" style="margin-bottom:1.5rem;";><h5>Submit</h5></button>
     </div>
     <div class="six columns">
         <label for="fleetMembersInput">Fleet Members</label>
