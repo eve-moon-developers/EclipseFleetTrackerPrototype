@@ -1,0 +1,17 @@
+.main_header {
+    border-bottom-width: 0;
+    border-bottom: 1px solid #E1E1E1;
+}
+
+.main_section {
+    margin-top: 10rem;
+}
+
+.sub_section {
+    margin-top: 2.5rem;
+}
+
+#login-username-div {
+    padding-top: 3.5rem;
+    float: right;
+}

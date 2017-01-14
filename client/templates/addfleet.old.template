@@ -4,15 +4,15 @@
 <div class="row">
     <div class="four columns">
         <label for="fcNameInput">FC Character Name</label>
-        <input class="u-full-width" type="text" placeholder="FC Name" id="fcNameInput" tabindex="100">
+        <input class="u-full-width" type="text" placeholder="FC Name" id="fcNameInput">
     </div>
     <div class="four columns">
         <label for="fleetTitleInput">Fleet Name</label>
-        <input class="u-full-width" type="text" placeholder="Fleet Name" id="fleetTitleInput" tabindex="101" maxlength="64">
+        <input class="u-full-width" type="text" placeholder="Fleet Name" id="fleetTitleInput">
     </div>
     <div class="four columns">
         <label for="fleetImportanceInput">Fleet Catagory</label>
-        <select class="u-full-width" type="text" placeholder="Fleet Name" id="fleetImportanceInput" tabindex="102">
+        <select class="u-full-width" type="text" placeholder="Fleet Name" id="fleetImportanceInput">
             <option value="-1">Select Catagory</option>
             <option value="0">Strat Op</option>
             <option value="1">Offensive Fleet</option>
@@ -28,12 +28,13 @@
 <div class="row">
     <div class="six columns" style="height:100%;">
         <label for="fleetDescriptionInput">Fleet Description</label>
-        <textarea style="resize:none; min-height:260px; margin-bottom:26px;" class="u-full-width" type="text" placeholder="Description" id="fleetDescriptionInput" tabindex="103"></textarea>
-        <hr>
-        <button id="submit-fleet-add-button" type=submit style="margin-bottom:1.5rem;" tabindex="105"><h5>Submit</h5></button>
+        <textarea style="resize:none; min-height:260px; margin-bottom:26px;" class="u-full-width" type="text" placeholder="Description" id="fleetDescriptionInput"></textarea>
+            <hr>
+        <button id="submit-fleet-add-button" type="submit" style="margin-bottom:1.5rem;";><h5>Submit</h5></button>
     </div>
     <div class="six columns">
-        <label for="fleetDoctrineInput">Fleet Composition</label>
-        <textarea class="u-full-width" type="text" placeholder="What doctrines are being used? Are there special ships in fleet? (Tackle, Hunters, Bridge, Ect)" id="fleetDoctrineInput" style="resize:none; min-height:390px;" tabindex="104"></textarea>
+        <label for="fleetMembersInput">Fleet Members</label>
+        <textarea class="u-full-width" type="text" placeholder="Copy and paste the fleet chat window user list. You may later update the fleet if attendance changes."
+            id="fleetMembersInput" style="resize:none; min-height:390px;"></textarea>
     </div>
 </div>

@@ -5,4 +5,4 @@ export PGPORT="5432";
 
 export PORT="8000";
 
-node ./index.js
+node ./index.js $@
