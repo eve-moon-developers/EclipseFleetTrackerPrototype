@@ -51,7 +51,7 @@ module.exports.bootstrap_pg = function(testComplete) {
         console.log(query);
         ft.pg.pool.connect(function(err, client, done) {
             if (err) {
-                next(new restify.InternalServerError('error fetching client from pool', err));
+                next(new restify.InternalServerError('Error fetching client from pool', err));
             }
 
             console.log("Client fetched.");
