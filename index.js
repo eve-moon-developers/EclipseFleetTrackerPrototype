@@ -1,11 +1,14 @@
 global.fleettool = {};
-
-if (process.argv[2] === "add-user") {
-    require("./utilities/usercmds.js").add_user();
-} else if (process.argv[2] === "del-user") {
-    require("./utilities/usercmds.js").del_user();
-} else if (process.argv[2] === "ls-users") {
-    require("./utilities/usercmds.js").ls_users();
+if (process.argv.length > 2) {
+    if (process.argv[2] === "add-user") {
+        require("./utilities/usercmds.js").add_user();
+    } else if (process.argv[2] === "del-user") {
+        require("./utilities/usercmds.js").del_user();
+    } else if (process.argv[2] === "ls-users") {
+        require("./utilities/usercmds.js").ls_users();
+    } else {
+        console.log("Invalid argument specified.")
+    }
 } else {
     console.log("Starting Eclipse Fleet Tool Server...");
 

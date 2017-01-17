@@ -15,6 +15,9 @@ module.exports.addFleet = function(req, res, next) {
     if (!params.Auth)
         return next(new restify.NotAuthorizedError('Auth token required.'));
 
+    if (!params.ID)
+        return next(new restify.NotAuthorizedError('User ID required.'));
+
     if (!login.check_auth(params.Auth))
         return next(new restify.NotAuthorizedError('Invalid auth token.'));
 
@@ -36,8 +39,8 @@ module.exports.addFleet = function(req, res, next) {
             return next(new restify.InternalServerError('Fleet Add - Convert FC query error.', err));
         }
 
-        var fleet_query = "INSERT INTO fleets (fc_character_id, title, importance, description, composition) VALUES ( $1, $2, $3, $4, $5) RETURNING (fleet_id)";
-        ft.pg.pool.query(fleet_query, [result1.rows[0].character_id, params.Title, params.Importance, params.Description, params.Composition], function(err, results2) {
+        var fleet_query = "INSERT INTO fleets (fc_character_id, title, fleet_type, description, composition, update_time, fleet_creator) VALUES ( $1, $2, $3, $4, $5, now() at time zone 'utc', $6) RETURNING (fleet_id)";
+        ft.pg.pool.query(fleet_query, [result1.rows[0].character_id, params.Title, params.Importance, params.Description, params.Composition, params.ID], function(err, results2) {
             if (err) {
                 console.log("Add Fleet Error: " + util.inspect(err));
                 return next(new restify.InternalServerError('Fleet Add - Fleet query error.', err));

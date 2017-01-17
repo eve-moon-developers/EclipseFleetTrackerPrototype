@@ -1,0 +1,21 @@
+These are the fleet catagories I currently have: (They can easily be expanded as it's just entries in a database.)
+
+* Strat Op: A fleet of the highest priority ordered by senior leadership.
+* Offensive Fleet: A fleet with a targetted mission of agression against another entity.
+* Defense Fleet: A fleet to defend MOON or allied assets, space, or members.
+* Response Fleet: A fleet formed in response to an act of agression by another entity.
+* Roaming Fleet: A fleet formed to seek out and engage other entities.
+* Standing Fleet: A fleet formed for standard in pocket operations.
+* PVE Fleet: A fleet formed to facilitate PVE.
+* Indy Fleet: A fleet formed to facilitate industry or mining.
+* Logistics Fleet: A fleet formed to facilitate logistics.
+* Other: A fleet formed for some other reason. Please specify clearly in the description.
+
+            <option value="0">Strat Op</option>
+            <option value="1">Offensive Fleet</option>
+            <option value="2">Defense Fleet</option>
+            <option value="3">Roam</option>
+            <option value="4">PVE</option>
+            <option value="4">Indy</option>
+            <option value="5">Standing Fleet</option>
+            <option value="6">Other</option>

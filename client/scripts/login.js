@@ -61,7 +61,8 @@ function tryLoadAuth(callback) {
                 }
             } else {
                 data.token = storedAuth;
-                data.username = result;
+                data.username = result.username;
+                data.ident = result;
                 updateAuthIcon();
                 if (callback) {
                     callback(true);

@@ -23,6 +23,7 @@ function tryAddFleet() {
     package.Description = escape($("#fleetDescriptionInput").val());
     package.Composition = $("#fleetDoctrineInput").val();
     package.Auth = data.token;
+    package.ID = data.ident.id;
     $.post("/api/fleet/add", package, function(data) {
         console.log(data);
     });

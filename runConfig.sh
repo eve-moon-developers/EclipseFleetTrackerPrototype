@@ -1,5 +1,5 @@
 export PGUSER="fleettool";
-export PGDATABASE="fleettool";
+export PGDATABASE="EclipseFleetTool";
 export PGPASSWORD="helloworld";
 export PGPORT="5432";
 
