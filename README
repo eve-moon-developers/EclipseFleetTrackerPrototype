@@ -1,0 +1,30 @@
+Eclipse Fleet Tracker
+Created by W. Craig Jones - AKA Forceful Peacekeeper / Sciencegeek Deathdealer
+
+Version 2 is a complete rewrite of version 1 due to issues inherent in the design of the system. They began to manifest early in development, and rather than play wack-a-bug, I decided to rewrite with better design in mind.
+
+Folder structure:
+
+/notes - Notes about different topics related to the design.
+/ops - Operations that are considered command line, such as first time setup and adding users.
+/client - Static files that will be transmitted to the client for processing.
+    /client/index.html - The startup page for the client. You don't want to edit this.
+    /client/src - Javascript for the client.
+    /client/css - CSS for the client
+    /client/img - Images for the client.
+    /client/tmp - Snippets of HTML for the client.
+/server - Files which are related to the server operation at a basic level.
+/api - Files for the API that the client hits.
+/sql - Files for setting up and maintaining the database.
+/bower_components - Client side dependencies.
+/node_modules - Server side dependencies.
+
+To start the server, use the "fleet_tool_config.sh" script.
+
+Stack:
+    Frontend is Skeleton + jQuery
+
+Security:
+    Without an auth token, nothing but the login page can be loaded.
+    All API calls must have an accompanying auth token with sufficient permissions.
+    For now there are no seperate permission levels.
