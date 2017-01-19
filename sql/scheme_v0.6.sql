@@ -122,7 +122,7 @@ ALTER SEQUENCE characters_character_id_seq OWNED BY characters.character_id;
 CREATE TABLE checkpoints (
     checkpoint_id integer NOT NULL,
     fleet_id integer NOT NULL,
-    "time" time without time zone NOT NULL,
+    "creation_time" timestamp without time zone NOT NULL,
     description text
 );
 
@@ -165,7 +165,7 @@ CREATE TABLE fleet_categories (
 );
 
 
-ALTER TABLE fleet_categories OWNER TO postgres;
+ALTER TABLE fleet_categories OWNER TO fleettool;
 
 --
 -- TOC entry 188 (class 1259 OID 16458)
@@ -180,7 +180,7 @@ CREATE SEQUENCE fleet_catagories_type_id_seq
     CACHE 1;
 
 
-ALTER TABLE fleet_catagories_type_id_seq OWNER TO postgres;
+ALTER TABLE fleet_catagories_type_id_seq OWNER TO fleettool;
 
 --
 -- TOC entry 2339 (class 0 OID 0)
@@ -199,7 +199,7 @@ ALTER SEQUENCE fleet_catagories_type_id_seq OWNED BY fleet_categories.type_id;
 CREATE VIEW fleet_checkpoints AS
  SELECT fleets.fleet_id,
     count(checkpoints.checkpoint_id) AS count,
-    max(checkpoints."time") AS last_updated
+    max(checkpoints."creation_time") AS last_updated
    FROM (fleets
      LEFT JOIN checkpoints ON ((fleets.fleet_id = checkpoints.fleet_id)))
   GROUP BY fleets.fleet_id;
@@ -668,7 +668,7 @@ GRANT ALL ON TABLE basic_fleets TO PUBLIC;
 
 REVOKE ALL ON TABLE fleet_categories FROM PUBLIC;
 REVOKE ALL ON TABLE fleet_categories FROM postgres;
-GRANT ALL ON TABLE fleet_categories TO postgres;
+GRANT ALL ON TABLE fleet_categories TO fleettool;
 GRANT ALL ON TABLE fleet_categories TO fleettool;
 
 
