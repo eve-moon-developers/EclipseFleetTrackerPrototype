@@ -14,13 +14,13 @@ module.exports.start_auth = function() {
     console.log("Booting auth system...");
 
     //Insert the dev token.
-    AuthCache.set("wcj", {
-        "valid": true,
-        "ident": "Peacekeeper-Dev",
-        "id": 1,
-        "rank": 100,
-        "token": "wcj"
-    });
+    //AuthCache.set("wcj", {
+    //    "valid": true,
+    //    "ident": "Peacekeeper-Dev",
+    //    "id": 1,
+    //    "rank": 100,
+    //    "token": "wcj"
+    //});
 };
 
 module.exports.get = function(token) {

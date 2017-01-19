@@ -49,9 +49,6 @@ CREATE TABLE characters (
     last_reference timestamp without time zone
 );
 
-
-ALTER TABLE characters OWNER TO fleettool;
-
 --
 -- TOC entry 182 (class 1259 OID 16429)
 -- Name: fleets; Type: TABLE; Schema: public; Owner: fleettool
@@ -71,9 +68,6 @@ CREATE TABLE fleets (
     fleet_creator integer
 );
 
-
-ALTER TABLE fleets OWNER TO fleettool;
-
 --
 -- TOC entry 183 (class 1259 OID 16438)
 -- Name: basic_fleets; Type: VIEW; Schema: public; Owner: fleettool
@@ -87,9 +81,6 @@ CREATE VIEW basic_fleets AS
     characters
   WHERE (fleets.fc_character_id = characters.character_id);
 
-
-ALTER TABLE basic_fleets OWNER TO fleettool;
-
 --
 -- TOC entry 184 (class 1259 OID 16442)
 -- Name: characters_character_id_seq; Type: SEQUENCE; Schema: public; Owner: fleettool
@@ -101,9 +92,6 @@ CREATE SEQUENCE characters_character_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER TABLE characters_character_id_seq OWNER TO fleettool;
 
 --
 -- TOC entry 2336 (class 0 OID 0)
@@ -127,8 +115,6 @@ CREATE TABLE checkpoints (
 );
 
 
-ALTER TABLE checkpoints OWNER TO fleettool;
-
 --
 -- TOC entry 186 (class 1259 OID 16450)
 -- Name: checkpoints_checkpoint_id_seq; Type: SEQUENCE; Schema: public; Owner: fleettool
@@ -141,8 +127,6 @@ CREATE SEQUENCE checkpoints_checkpoint_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE checkpoints_checkpoint_id_seq OWNER TO fleettool;
 
 --
 -- TOC entry 2337 (class 0 OID 0)
@@ -165,8 +149,6 @@ CREATE TABLE fleet_categories (
 );
 
 
-ALTER TABLE fleet_categories OWNER TO fleettool;
-
 --
 -- TOC entry 188 (class 1259 OID 16458)
 -- Name: fleet_catagories_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -178,9 +160,6 @@ CREATE SEQUENCE fleet_catagories_type_id_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
-ALTER TABLE fleet_catagories_type_id_seq OWNER TO fleettool;
 
 --
 -- TOC entry 2339 (class 0 OID 0)
@@ -205,8 +184,6 @@ CREATE VIEW fleet_checkpoints AS
   GROUP BY fleets.fleet_id;
 
 
-ALTER TABLE fleet_checkpoints OWNER TO fleettool;
-
 --
 -- TOC entry 190 (class 1259 OID 16464)
 -- Name: paps; Type: TABLE; Schema: public; Owner: fleettool
@@ -218,8 +195,6 @@ CREATE TABLE paps (
     checkpoint_id integer NOT NULL
 );
 
-
-ALTER TABLE paps OWNER TO fleettool;
 
 --
 -- TOC entry 191 (class 1259 OID 16467)
@@ -237,8 +212,6 @@ CREATE VIEW fleet_participation AS
           WHERE (paps.checkpoint_id = checkpoints.checkpoint_id)) uni_paps ON ((fleets.fleet_id = uni_paps.fleet_id)))
   GROUP BY fleets.fleet_id;
 
-
-ALTER TABLE fleet_participation OWNER TO fleettool;
 
 --
 -- TOC entry 192 (class 1259 OID 16471)
@@ -258,9 +231,6 @@ CREATE VIEW fleet_summary AS
     fleet_participation
   WHERE ((fleets.fc_character_id = characters.character_id) AND (fleets.fleet_id = fleet_checkpoints.fleet_id) AND (fleets.fleet_id = fleet_participation.fleet_id));
 
-
-ALTER TABLE fleet_summary OWNER TO fleettool;
-
 --
 -- TOC entry 193 (class 1259 OID 16475)
 -- Name: fleets_fleet_id_seq; Type: SEQUENCE; Schema: public; Owner: fleettool
@@ -273,16 +243,11 @@ CREATE SEQUENCE fleets_fleet_id_seq
     NO MAXVALUE
     CACHE 1;
 
-
-ALTER TABLE fleets_fleet_id_seq OWNER TO fleettool;
-
 --
 -- TOC entry 2343 (class 0 OID 0)
 -- Dependencies: 193
 -- Name: fleets_fleet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fleettool
 --
-
-ALTER SEQUENCE fleets_fleet_id_seq OWNED BY fleets.fleet_id;
 
 
 --
@@ -301,7 +266,6 @@ CREATE TABLE logins (
 );
 
 
-ALTER TABLE logins OWNER TO fleettool;
 
 --
 -- TOC entry 195 (class 1259 OID 16480)
@@ -316,7 +280,6 @@ CREATE SEQUENCE logins_id_seq
     CACHE 1;
 
 
-ALTER TABLE logins_id_seq OWNER TO fleettool;
 
 --
 -- TOC entry 2344 (class 0 OID 0)
@@ -341,7 +304,6 @@ CREATE TABLE members_fleets (
 ALTER TABLE ONLY members_fleets REPLICA IDENTITY NOTHING;
 
 
-ALTER TABLE members_fleets OWNER TO fleettool;
 
 --
 -- TOC entry 199 (class 1259 OID 16540)
@@ -357,7 +319,6 @@ CREATE TABLE members_paps (
 ALTER TABLE ONLY members_paps REPLICA IDENTITY NOTHING;
 
 
-ALTER TABLE members_paps OWNER TO fleettool;
 
 --
 -- TOC entry 200 (class 1259 OID 16544)
@@ -375,7 +336,6 @@ CREATE VIEW members_summary AS
   WHERE ((characters.character_id = members_paps.character_id) AND (characters.character_id = members_fleets.character_id));
 
 
-ALTER TABLE members_summary OWNER TO fleettool;
 
 --
 -- TOC entry 196 (class 1259 OID 16482)
@@ -390,7 +350,6 @@ CREATE TABLE pap_count (
 ALTER TABLE ONLY pap_count REPLICA IDENTITY NOTHING;
 
 
-ALTER TABLE pap_count OWNER TO fleettool;
 
 --
 -- TOC entry 197 (class 1259 OID 16485)
@@ -405,7 +364,6 @@ CREATE SEQUENCE paps_pap_id_seq
     CACHE 1;
 
 
-ALTER TABLE paps_pap_id_seq OWNER TO fleettool;
 
 --
 -- TOC entry 2348 (class 0 OID 0)
@@ -635,118 +593,4 @@ ALTER TABLE ONLY fleets
 ALTER TABLE ONLY fleets
     ADD CONSTRAINT fleet_type_fkey FOREIGN KEY (fleet_type) REFERENCES fleet_categories(type_id);
 
-
---
--- TOC entry 2333 (class 0 OID 0)
--- Dependencies: 7
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO fleettool;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
---
--- TOC entry 2335 (class 0 OID 0)
--- Dependencies: 183
--- Name: basic_fleets; Type: ACL; Schema: public; Owner: fleettool
---
-
-REVOKE ALL ON TABLE basic_fleets FROM PUBLIC;
-REVOKE ALL ON TABLE basic_fleets FROM fleettool;
-GRANT ALL ON TABLE basic_fleets TO fleettool;
-GRANT ALL ON TABLE basic_fleets TO PUBLIC;
-
-
---
--- TOC entry 2338 (class 0 OID 0)
--- Dependencies: 187
--- Name: fleet_categories; Type: ACL; Schema: public; Owner: postgres
---
-
-REVOKE ALL ON TABLE fleet_categories FROM PUBLIC;
-REVOKE ALL ON TABLE fleet_categories FROM postgres;
-GRANT ALL ON TABLE fleet_categories TO fleettool;
-GRANT ALL ON TABLE fleet_categories TO fleettool;
-
-
---
--- TOC entry 2340 (class 0 OID 0)
--- Dependencies: 189
--- Name: fleet_checkpoints; Type: ACL; Schema: public; Owner: fleettool
---
-
-REVOKE ALL ON TABLE fleet_checkpoints FROM PUBLIC;
-REVOKE ALL ON TABLE fleet_checkpoints FROM fleettool;
-GRANT ALL ON TABLE fleet_checkpoints TO fleettool;
-GRANT ALL ON TABLE fleet_checkpoints TO PUBLIC;
-
-
---
--- TOC entry 2341 (class 0 OID 0)
--- Dependencies: 191
--- Name: fleet_participation; Type: ACL; Schema: public; Owner: fleettool
---
-
-REVOKE ALL ON TABLE fleet_participation FROM PUBLIC;
-REVOKE ALL ON TABLE fleet_participation FROM fleettool;
-GRANT ALL ON TABLE fleet_participation TO fleettool;
-GRANT ALL ON TABLE fleet_participation TO PUBLIC;
-
-
---
--- TOC entry 2342 (class 0 OID 0)
--- Dependencies: 192
--- Name: fleet_summary; Type: ACL; Schema: public; Owner: fleettool
---
-
-REVOKE ALL ON TABLE fleet_summary FROM PUBLIC;
-REVOKE ALL ON TABLE fleet_summary FROM fleettool;
-GRANT ALL ON TABLE fleet_summary TO fleettool;
-GRANT ALL ON TABLE fleet_summary TO PUBLIC;
-
-
---
--- TOC entry 2345 (class 0 OID 0)
--- Dependencies: 198
--- Name: members_fleets; Type: ACL; Schema: public; Owner: fleettool
---
-
-REVOKE ALL ON TABLE members_fleets FROM PUBLIC;
-REVOKE ALL ON TABLE members_fleets FROM fleettool;
-GRANT ALL ON TABLE members_fleets TO fleettool;
-GRANT ALL ON TABLE members_fleets TO PUBLIC;
-
-
---
--- TOC entry 2346 (class 0 OID 0)
--- Dependencies: 199
--- Name: members_paps; Type: ACL; Schema: public; Owner: fleettool
---
-
-REVOKE ALL ON TABLE members_paps FROM PUBLIC;
-REVOKE ALL ON TABLE members_paps FROM fleettool;
-GRANT ALL ON TABLE members_paps TO fleettool;
-GRANT ALL ON TABLE members_paps TO PUBLIC;
-
-
---
--- TOC entry 2347 (class 0 OID 0)
--- Dependencies: 196
--- Name: pap_count; Type: ACL; Schema: public; Owner: fleettool
---
-
-REVOKE ALL ON TABLE pap_count FROM PUBLIC;
-REVOKE ALL ON TABLE pap_count FROM fleettool;
-GRANT ALL ON TABLE pap_count TO fleettool;
-GRANT ALL ON TABLE pap_count TO PUBLIC;
-
-
--- Completed on 2017-01-18 17:15:07 CST
-
---
--- PostgreSQL database dump complete
---
-
+    

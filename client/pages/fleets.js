@@ -44,8 +44,6 @@ router.pages["fleets"].handler = function() {
                         cont += "<td>" + Math.floor(seconds / 86400) + "d</td>";
                     }
                 }
-
-                cont += "<td>-1</td>";
                 cont += "<td>" + d.members + "</td>";
                 cont += "<td>" + d.checkpoints + "</td>";
                 cont += "<td><button onclick=router.load('#update/" + d.id +
