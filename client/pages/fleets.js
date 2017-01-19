@@ -26,6 +26,25 @@ router.pages["fleets"].handler = function() {
                 cont += "<tr>";
                 cont += "<td>" + d.title + "</td>";
                 cont += "<td>" + d.fc + "</td>";
+
+                if (d.last_updated == null) {
+                    cont += "<td>&#x221e;</td>"
+                } else {
+                    var created = new Date(d.last_updated);
+                    console.log(created);
+                    var seconds = (Date.now() - created + created.getTimezoneOffset() * 60 * 1000) / 1000;
+
+                    if (seconds < 60) {
+                        cont += "<td>" + Math.floor(seconds) + "s</td>";
+                    } else if (seconds < 3600) {
+                        cont += "<td>" + Math.floor(seconds / 60) + "m</td>";
+                    } else if (seconds < 86400) {
+                        cont += "<td>" + Math.floor(seconds / 3600) + "h</td>";
+                    } else {
+                        cont += "<td>" + Math.floor(seconds / 86400) + "d</td>";
+                    }
+                }
+
                 cont += "<td>-1</td>";
                 cont += "<td>" + d.members + "</td>";
                 cont += "<td>" + d.checkpoints + "</td>";

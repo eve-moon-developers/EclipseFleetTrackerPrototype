@@ -30,7 +30,7 @@ module.exports.handler = function(req, res, next) {
             for (m of values) {
                 member_ids.push(m.rows[0].character_id);
             }
-            var checkpoint_query = "INSERT INTO checkpoints (fleet_id, time, description) VALUES ($1, now() at time zone 'utc', $2) RETURNING checkpoint_id";
+            var checkpoint_query = "INSERT INTO checkpoints (fleet_id, creation_time, description) VALUES ($1, now() at time zone 'utc', $2) RETURNING checkpoint_id";
             return pg_pool.query(checkpoint_query, [params.fleet_id, params.notes]);
         }).then(result => {
             var checkpoint_id = result.rows[0].checkpoint_id;
