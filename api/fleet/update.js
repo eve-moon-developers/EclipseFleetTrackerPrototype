@@ -43,6 +43,8 @@ module.exports.handler = function(req, res, next) {
             return Promise.all(queries);
         }).then(values => {
             console.log(util.inspect(values));
+            res.send("Done.");
+            next();
         });
     }
 }

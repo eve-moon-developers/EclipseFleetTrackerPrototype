@@ -41,6 +41,7 @@ router.pages["update"].handler = function() {
 
                     $.post("/api/fleet/update", package, function(result) {
                         console.log(result);
+                        router.reload();
                     });
                 }
             });

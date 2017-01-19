@@ -8,6 +8,7 @@ module.exports.handler = function(req, res, next) {
     } else {
         pg_pool.query("SELECT * from fleet_summary ORDER BY last_updated DESC LIMIT 25").then(function(data) {
             res.send(data.rows);
+            console.log("Fleet listing: " + data.rows.length);
             return next();
         });
     }
