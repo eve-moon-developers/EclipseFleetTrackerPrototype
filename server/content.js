@@ -35,7 +35,7 @@ module.exports.serve_content = function() {
         console.log(mount.spec.path + " @ " + mount.spec.method);
     });
 
-    server.listen(8000, function() {
+    server.listen(process.env.PORT, function() {
         console.log("Eclipse Fleet Tracker being served at port 8000");
     });
 }

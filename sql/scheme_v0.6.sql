@@ -592,5 +592,3 @@ ALTER TABLE ONLY fleets
 
 ALTER TABLE ONLY fleets
     ADD CONSTRAINT fleet_type_fkey FOREIGN KEY (fleet_type) REFERENCES fleet_categories(type_id);
-
-    
