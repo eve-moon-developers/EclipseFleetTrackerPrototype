@@ -1,5 +1,10 @@
 ALTER TABLE public.checkpoints
-    ADD COLUMN creator integer SET NOT NULL;
+    ADD COLUMN creator integer;
+
+UPDATE public.checkpoints SET creator=1;
+
+ALTER TABLE public.checkpoints
+    ALTER COLUMN creator SET NOT NULL;
 
 ALTER TABLE public.checkpoints
     ADD CONSTRAINT creator_fkey FOREIGN KEY (creator)
@@ -18,9 +23,6 @@ CREATE OR REPLACE VIEW public.checkpoint_count AS
    FROM paps
   GROUP BY paps.checkpoint_id;
 
-ALTER TABLE public.checkpoint_count
-    OWNER TO fleettool;
-
 CREATE OR REPLACE VIEW public.checkpoint_details AS
  SELECT checkpoints.checkpoint_id,
     checkpoints.description,
@@ -32,6 +34,3 @@ CREATE OR REPLACE VIEW public.checkpoint_details AS
     logins
   WHERE checkpoints.creator = logins.id AND checkpoints.checkpoint_id = checkpoint_count.checkpoint_id
   ORDER BY checkpoints.creation_time;
-
-ALTER TABLE public.checkpoint_details
-    OWNER TO fleettool;
