@@ -1,10 +1,10 @@
-router.pages["create"] = {};
+router.pages["fleets/create"] = {};
 
-router.pages["create"].handler = function() {
+router.pages["fleets/create"].handler = function() {
 
     console.log("Loading create page...");
 
-    var me = router.pages["create"];
+    var me = router.pages["fleets/create"];
     if (me.template === undefined) {
         $.get("templates/add_fleet.html", function(data) {
             me.template = data;
@@ -51,7 +51,7 @@ router.pages["create"].handler = function() {
             $.post("/api/fleet/create", package, function(data) {
                 console.log(data);
                 if (data.valid) {
-                    router.load("#update/" + data.id);
+                    router.load("#fleets/update$" + data.id);
                 }
             });
         });

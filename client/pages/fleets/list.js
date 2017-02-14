@@ -1,12 +1,12 @@
-router.pages["fleets"] = {};
+router.pages["fleets/list"] = {};
 
-router.pages["fleets"].handler = function() {
+router.pages["fleets/list"].handler = function() {
 
     console.log("Loading fleets page...");
 
-    var me = router.pages["fleets"];
+    var me = router.pages["fleets/list"];
     if (me.template === undefined) {
-        $.get("templates/view_fleets.html", function(data) {
+        $.get("templates/list_fleets.html", function(data) {
             me.template = data;
             me.handler();
         });
@@ -46,7 +46,9 @@ router.pages["fleets"].handler = function() {
                 }
                 cont += "<td>" + d.members + "</td>";
                 cont += "<td>" + d.checkpoints + "</td>";
-                cont += "<td><button onclick=router.load('#update/" + d.id +
+                cont += "<td><button onclick=router.load('#fleets/view$" + d.id +
+                    "')>View</button></td>";
+                cont += "<td><button onclick=router.load('#fleets/update$" + d.id +
                     "')>Update</button></td>";
                 cont += "</tr>"
             }

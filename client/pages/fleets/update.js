@@ -1,10 +1,10 @@
-router.pages["update"] = {};
+router.pages["fleets/update"] = {};
 
-router.pages["update"].handler = function() {
+router.pages["fleets/update"].handler = function() {
 
     console.log("Loading update page...");
 
-    var me = router.pages["update"];
+    var me = router.pages["fleets/update"];
 
     if (router.hash.length < 2) {
         router.error_message = "Can not update a non-existant fleet.";

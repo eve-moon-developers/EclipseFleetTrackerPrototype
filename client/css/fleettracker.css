@@ -49,6 +49,10 @@ input[type="button"]:disabled {
     color: #ff6666;
 }
 
+.warn-background {
+    background-color: #fff9f7;
+}
+
 .note-block {
     margin-top: 1.5rem;
     padding: 2.5rem;

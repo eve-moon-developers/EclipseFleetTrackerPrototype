@@ -10,6 +10,9 @@ function create_fleet(trusted_auth, params, res, next) {
     if (!params.auth.id)
         return next(new restify.NotAuthorizedError('User ID required.'));
 
+    if (!req.params.fleet_id)
+        return next(new restify.InvalidArgumentError('Fleet ID required.'));
+
     console.log("Recieved fleet update request: ");
     params.members = params.members.split("\n");
 

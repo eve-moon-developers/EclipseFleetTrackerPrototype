@@ -2,11 +2,12 @@ var router = {};
 
 router.pages = {};
 
-router.pages["fleets"] = false;
+router.pages["fleets/list"] = false;
+router.pages["fleets/update"] = false;
+router.pages["fleets/view"] = false;
+router.pages["fleets/create"] = false;
 router.pages["members"] = false;
 router.pages["dashboard"] = false;
-router.pages["create"] = false;
-router.pages["update"] = false;
 router.pages["error"] = false;
 
 router.reload = function() {
@@ -14,7 +15,7 @@ router.reload = function() {
         location.hash = "#dashboard";
     }
 
-    router.hash = location.hash.replace("#", "").split("/");
+    router.hash = location.hash.replace("#", "").split("$");
 
     if (router.pages[router.hash[0]] == undefined) {
         location.hash = "#error";
@@ -43,9 +44,9 @@ function init_router() {
 
     ft.status.set(ft.ident.ident);
 
-    ft.page.nav.fleets.click(function() { router.load("#fleets"); });
+    ft.page.nav.fleets.click(function() { router.load("#fleets/list"); });
     ft.page.nav.members.click(function() { router.load("#members"); });
-    ft.page.nav.create.click(function() { router.load("#create"); });
+    ft.page.nav.create.click(function() { router.load("#fleets/create"); });
     ft.page.nav.dashboard.click(function() { router.load("#dashboard"); });
 
 }

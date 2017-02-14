@@ -24,7 +24,14 @@ module.exports.start_auth = function() {
 };
 
 module.exports.get = function(token) {
-    return AuthCache.get(token);
+    var auth = AuthCache.get(token);
+    if (auth === undefined) {
+        return auth;
+    } else {
+        //Now we need to handle updating the database.
+        //This includes revoking permissions and bullshit like that.
+        return auth;
+    }
 }
 
 module.exports.login = function(auth) {
