@@ -35,3 +35,22 @@ input[type="button"]:disabled {
 .section {
     margin-top: 10rem;
 }
+
+.minor-section {
+    margin-top: 5rem;
+}
+
+.warn-strong-text {
+    color: #ff6666;
+    font-weight: bold;
+}
+
+.warn-weak-text {
+    color: #ff6666;
+}
+
+.note-block {
+    margin-top: 1.5rem;
+    padding: 2.5rem;
+    background-color: #fff9f7;
+}

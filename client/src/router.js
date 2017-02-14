@@ -11,7 +11,7 @@ router.pages["error"] = false;
 
 router.reload = function() {
     if (location.hash == "") {
-        location.hash = "#fleets";
+        location.hash = "#dashboard";
     }
 
     router.hash = location.hash.replace("#", "").split("/");
