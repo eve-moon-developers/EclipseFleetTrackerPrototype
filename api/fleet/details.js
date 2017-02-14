@@ -10,8 +10,12 @@ module.exports.handler = function(req, res, next) {
             return next(new restify.InvalidArgumentError('Fleet ID required.'));
 
         pg_pool.query("SELECT * from fleet_details WHERE id=$1", [req.params.fleet_id]).then(function(data) {
-            res.send(data.rows);
-            return next();
+            var package = { "fleet": data.rows[0], checkpoints: [] };
+            pg_pool.query("SELECT * from checkpoint_details WHERE fleet_id=$1", [req.params.fleet_id]).then(function(data) {
+                package.checkpoints = data.rows;
+                res.send(package);
+                return next();
+            });
         });
     }
 };
