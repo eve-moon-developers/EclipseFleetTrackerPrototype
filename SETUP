@@ -1,0 +1,11 @@
+1) Install NodeJS and Postgres in your environment.
+2) Run the scheme_v#.#.sql script in the sql folder, then run fleet_catagories and super_user.
+3) Configure fleet_tool_config.sh to your settings.
+4) Run fleet_tool_config.sh to start the server and verify your settings. See if navigating to the site brings you to the login page."
+5) Stop the fleet tool and then run "fleet_tool_config.sh add-user [username] [password] 10" to add an initial admin user.
+6) Run the fleet_tool_config.sh now.
+
+Remember that if you update the client files, you only need to do a hard fresh of the browser. 
+
+HOWEVER
+If you update the server (node js stuff in api, ops, or server) you need to restart the server.
