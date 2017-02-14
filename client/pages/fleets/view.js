@@ -2,7 +2,13 @@ router.pages["fleets/view"] = {};
 
 router.pages["fleets/view"].handler = function() {
 
-    console.log("Loading fleets page...");
+    console.log("Loading fleet view page...");
+
+    if (router.hash.length < 2) {
+        router.error_message = "Can not view a non-existant fleet.";
+        router.load("#error");
+        return;
+    }
 
     var me = router.pages["fleets/view"];
     if (me.template === undefined) {
@@ -17,7 +23,6 @@ router.pages["fleets/view"].handler = function() {
         router.clear_buttons();
 
         $("#button-delete-fleet").click(function() {
-
             $("#button-delete-fleet").prop("disabled", true);
 
             var package = {};
@@ -32,6 +37,17 @@ router.pages["fleets/view"].handler = function() {
                     router.load("fleets/list");
                 }
             });
+        });
+
+        $.get("/api/fleet/details", { auth: ft.ident, fleet_id: router.hash[1] }, function(data) {
+            if (!data || data.length === 0) {
+                router.error_message = "Can not view a non-existant fleet.";
+                router.load("#error");
+                return;
+            }
+            console.log("!!!!!!!!!!!!!!");
+            console.log("Fleet data");
+            console.log(data);
         });
     }
 }

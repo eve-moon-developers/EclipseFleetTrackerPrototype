@@ -31,7 +31,7 @@ router.pages["fleets/update"].handler = function() {
             var members = $("#fleet-checkpoint-member-input");
             $("#submit-fleet-update-button").click(function(e) {
                 if (members.val().length == 0) {
-                    alert("You need to add at least 1 memeber to the checkpoint list.");
+                    alert("You need to add at least 1 member to the checkpoint list.");
                 } else {
                     var package = {};
                     package.auth = ft.ident;
