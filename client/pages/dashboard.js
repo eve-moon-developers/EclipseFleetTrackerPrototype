@@ -11,11 +11,12 @@ router.pages["dashboard"].handler = function() {
             me.handler();
         });
     } else {
+        var template_html = "";
         if (ft.ident.rank >= 10) {
-            var admin_button = "<button class='u-full-width warn-background warn-strong-text' onclick=\"router.load('admin/list')\" >Admin Panel</button>";
-            me.template = admin_button + me.template;
+            template_html += "<button class='u-full-width warn-background warn-strong-text' onclick=\"router.load('admin/list')\" >Admin Panel</button>";
         }
-        ft.page.section.body.html(me.template);
+        template_html += me.template;
+        ft.page.section.body.html(template_html);
         ft.page.section.body.fadeIn();
 
         router.clear_buttons();
