@@ -10,6 +10,8 @@ module.exports.register = function() {
     server.post('/api/fleet/update', require('api/fleet/update.js').handler);
     server.get('/api/fleet/basic', require('api/fleet/basic.js').handler);
     server.get('/api/fleet/listing', require('api/fleet/listing.js').handler);
+    server.get('/api/fleet/details', require('api/fleet/details.js').handler);
+    server.get('/api/fleet/checkpoint_details', require('api/fleet/checkpoint_details.js').handler);
     server.get('/api/members/listing', require('api/members/listing.js').handler);
     server.get('/api/util/random_members', require('api/util/random_members.js').handler);
 }

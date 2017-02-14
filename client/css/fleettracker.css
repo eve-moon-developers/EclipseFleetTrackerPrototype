@@ -17,12 +17,6 @@
     margin-top: 10rem;
 }
 
-#main-footer-div {
-    border-top-width: 0;
-    border-top: 1px solid #E1E1E1;
-    margin-top: 10rem;
-}
-
 .button:disabled,
 button:disabled,
 input[type="submit"]:disabled,
@@ -38,6 +32,12 @@ input[type="button"]:disabled {
 
 .minor-section {
     margin-top: 5rem;
+}
+
+.break-line {
+    border-top-width: 0;
+    border-top: 1px solid #E1E1E1;
+    padding-top: 2.5rem;
 }
 
 .warn-strong-text {

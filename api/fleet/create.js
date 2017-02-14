@@ -4,7 +4,8 @@ var util = require('util');
 var restify = require('restify');
 
 module.exports.handler = function(req, res, next) {
-    if (auth.get(req.params.auth.token) === undefined) {
+    var trusted_auth = auth.get(req.params.auth.token);
+    if (trusted_auth === undefined) {
         res.send({ "valid": false, "msg": "Bad auth token" });
         return next();
     } else {
@@ -33,7 +34,7 @@ module.exports.handler = function(req, res, next) {
         var fc_query = "INSERT INTO characters (name) VALUES ( $1 ) ON CONFLICT (name) DO UPDATE SET last_reference=now() at time zone 'utc' RETURNING (character_id)";
         pg_pool.query(fc_query, [params.fc]).then(function(result) {
             var fleet_query = "INSERT INTO fleets (fc_character_id, title, fleet_type, description, composition, update_time, fleet_creator) VALUES ( $1, $2, $3, $4, $5, now() at time zone 'utc', $6) RETURNING (fleet_id)";
-            return pg_pool.query(fleet_query, [result.rows[0].character_id, params.title, params.importance, params.description, params.composition, params.auth.user_id]);
+            return pg_pool.query(fleet_query, [result.rows[0].character_id, params.title, params.importance, params.description, params.composition, trusted_auth.id]);
         }).then(function(result) {
             console.log(util.inspect(result));
             res.send({ "valid": true, "id": result.rows[0].fleet_id });
