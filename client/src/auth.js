@@ -12,7 +12,7 @@ function init_client_auth() {
 }
 
 function validate_auth_token() {
-    $.get("/api/login/check", { "token": ft.ident.token }, function(data) {
+    $.post("/api/login/check", { "token": ft.ident.token }, function(data) {
         if (data.valid) {
             ft.ident = data;
             $.getScript('src/router.js');
@@ -63,7 +63,7 @@ function submit_credentials() {
 
     password = dcodeIO.bcrypt.hashSync(password, stdSalt);
 
-    $.get('/api/login/get', {
+    $.post('/api/login/get', {
         "username": username,
         "password": password
     }, function(data) {

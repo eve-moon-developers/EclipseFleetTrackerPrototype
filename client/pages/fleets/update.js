@@ -13,7 +13,7 @@ router.pages["fleets/update"].handler = function() {
     }
 
     if (me.template === undefined) {
-        $.get("templates/update_fleet.html", function(data) {
+        $.get("templates/fleets/update_fleet.html", function(data) {
             me.template = data;
             me.handler();
         });

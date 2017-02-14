@@ -6,7 +6,7 @@ router.pages["fleets/list"].handler = function() {
 
     var me = router.pages["fleets/list"];
     if (me.template === undefined) {
-        $.get("templates/list_fleets.html", function(data) {
+        $.get("templates/fleets/list_fleets.html", function(data) {
             me.template = data;
             me.handler();
         });

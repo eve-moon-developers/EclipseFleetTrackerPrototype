@@ -6,6 +6,7 @@ router.pages["fleets/list"] = false;
 router.pages["fleets/update"] = false;
 router.pages["fleets/view"] = false;
 router.pages["fleets/create"] = false;
+router.pages["admin/list"] = false;
 router.pages["members"] = false;
 router.pages["dashboard"] = false;
 router.pages["error"] = false;

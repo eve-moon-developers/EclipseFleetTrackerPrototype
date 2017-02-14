@@ -12,7 +12,7 @@ router.pages["fleets/view"].handler = function() {
 
     var me = router.pages["fleets/view"];
     if (me.template === undefined) {
-        $.get("templates/view_fleet.html", function(data) {
+        $.get("templates/fleets/view_fleet.html", function(data) {
             me.template = data;
             me.handler();
         });
