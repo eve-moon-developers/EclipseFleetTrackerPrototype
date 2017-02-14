@@ -52,14 +52,14 @@ function create_fleet(trusted_auth, params, res, next) {
 module.exports.handler = function(req, res, next) {
     var trusted_auth = auth.get(req.params.auth.token);
     if (trusted_auth === undefined) {
-        res.send({ "valid": false, "msg": "Bad auth token" });
+        res.send({ "invalid": true, "msg": "Bad auth token" });
         return next();
     } else if (trusted_auth.rank < 5) {
         pg_pool.query("SELECT fleet_id FROM fleets WHERE fleets.fleet_creator=$1", [trusted_auth.id]).then(function(data) {
             if (data.rows.length > 0) {
                 create_fleet(trusted_auth, req.params, res, next);
             }
-            res.send({ "valid": false, "msg": "Not fleet creator or high rank." });
+            res.send({ "invalid": true, "msg": "Not fleet creator or high rank." });
         });
     } else {
         create_fleet(trusted_auth, req.params, res, next);

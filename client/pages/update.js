@@ -41,7 +41,11 @@ router.pages["update"].handler = function() {
 
                     $.post("/api/fleet/update", package, function(result) {
                         console.log(result);
-                        router.reload();
+                        if (result.invalid && !alert("Checkpoint not added: " + result.msg)) {
+                            router.load("dashboard");
+                        } else if (!alert("Checkpoint added.")) {
+                            router.reload();
+                        }
                     });
                 }
             });
