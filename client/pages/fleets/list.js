@@ -32,7 +32,7 @@ router.pages["fleets/list"].handler = function() {
                 } else {
                     var created = new Date(d.last_updated);
                     //console.log(created);
-                    var seconds = (Date.now() - created + created.getTimezoneOffset() * 60 * 1000) / 1000;
+                    var seconds = (Date.now() - created) / 1000;
 
                     if (seconds < 60) {
                         cont += "<td>" + Math.floor(seconds) + "s</td>";
