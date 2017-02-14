@@ -3,14 +3,14 @@ var pg_pool = require("server/database").pg_pool;
 var util = require('util');
 var restify = require('restify');
 
-function create_fleet(trusted_auth, params, res, next) {
+function update_fleet(trusted_auth, params, res, next) {
     if (!params.auth)
         return next(new restify.NotAuthorizedError('Auth token required.'));
 
     if (!params.auth.id)
         return next(new restify.NotAuthorizedError('User ID required.'));
 
-    if (!req.params.fleet_id)
+    if (!params.fleet_id)
         return next(new restify.InvalidArgumentError('Fleet ID required.'));
 
     console.log("Recieved fleet update request: ");
@@ -60,11 +60,11 @@ module.exports.handler = function(req, res, next) {
     } else if (trusted_auth.rank < 5) {
         pg_pool.query("SELECT fleet_id FROM fleets WHERE fleets.fleet_creator=$1", [trusted_auth.id]).then(function(data) {
             if (data.rows.length > 0) {
-                create_fleet(trusted_auth, req.params, res, next);
+                update_fleet(trusted_auth, req.params, res, next);
             }
             res.send({ "invalid": true, "msg": "Not fleet creator or high rank." });
         });
     } else {
-        create_fleet(trusted_auth, req.params, res, next);
+        update_fleet(trusted_auth, req.params, res, next);
     }
 }
