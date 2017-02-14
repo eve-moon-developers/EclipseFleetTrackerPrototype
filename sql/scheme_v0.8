@@ -5,7 +5,7 @@
 -- Dumped from database version 9.6.1
 -- Dumped by pg_dump version 9.6.1
 
--- Started on 2017-02-14 02:37:12
+-- Started on 2017-02-14 13:31:57
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -25,7 +25,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2246 (class 0 OID 0)
+-- TOC entry 2241 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
 --
@@ -61,8 +61,8 @@ CREATE TABLE fleets (
     fleet_type integer,
     description text,
     composition text,
-    creation_time timestamp without time zone DEFAULT timezone('utc'::text, now()),
-    update_time timestamp without time zone,
+    creation_time timestamp with time zone DEFAULT timezone('utc'::text, now()),
+    update_time timestamp with time zone,
     member_count integer DEFAULT 0,
     update_count integer DEFAULT 0,
     fleet_creator integer NOT NULL
@@ -97,7 +97,7 @@ CREATE SEQUENCE characters_character_id_seq
 
 
 --
--- TOC entry 2247 (class 0 OID 0)
+-- TOC entry 2242 (class 0 OID 0)
 -- Dependencies: 188
 -- Name: characters_character_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -106,7 +106,7 @@ ALTER SEQUENCE characters_character_id_seq OWNED BY characters.character_id;
 
 
 --
--- TOC entry 194 (class 1259 OID 16777)
+-- TOC entry 193 (class 1259 OID 16777)
 -- Name: paps; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -118,7 +118,7 @@ CREATE TABLE paps (
 
 
 --
--- TOC entry 206 (class 1259 OID 16978)
+-- TOC entry 203 (class 1259 OID 16978)
 -- Name: checkpoint_count; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -137,14 +137,14 @@ CREATE VIEW checkpoint_count AS
 CREATE TABLE checkpoints (
     checkpoint_id integer NOT NULL,
     fleet_id integer NOT NULL,
-    creation_time timestamp without time zone NOT NULL,
+    creation_time timestamp with time zone NOT NULL,
     description text,
     creator integer NOT NULL
 );
 
 
 --
--- TOC entry 198 (class 1259 OID 16790)
+-- TOC entry 196 (class 1259 OID 16790)
 -- Name: logins; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -160,7 +160,7 @@ CREATE TABLE logins (
 
 
 --
--- TOC entry 207 (class 1259 OID 17011)
+-- TOC entry 205 (class 1259 OID 17042)
 -- Name: checkpoint_details; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -192,7 +192,7 @@ CREATE SEQUENCE checkpoints_checkpoint_id_seq
 
 
 --
--- TOC entry 2248 (class 0 OID 0)
+-- TOC entry 2243 (class 0 OID 0)
 -- Dependencies: 190
 -- Name: checkpoints_checkpoint_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -226,7 +226,7 @@ CREATE SEQUENCE fleet_catagories_type_id_seq
 
 
 --
--- TOC entry 2249 (class 0 OID 0)
+-- TOC entry 2244 (class 0 OID 0)
 -- Dependencies: 192
 -- Name: fleet_catagories_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -235,7 +235,7 @@ ALTER SEQUENCE fleet_catagories_type_id_seq OWNED BY fleet_categories.type_id;
 
 
 --
--- TOC entry 193 (class 1259 OID 16773)
+-- TOC entry 204 (class 1259 OID 17038)
 -- Name: fleet_checkpoints; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -249,7 +249,7 @@ CREATE VIEW fleet_checkpoints AS
 
 
 --
--- TOC entry 195 (class 1259 OID 16780)
+-- TOC entry 194 (class 1259 OID 16780)
 -- Name: fleet_participation; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -266,31 +266,7 @@ CREATE VIEW fleet_participation AS
 
 
 --
--- TOC entry 205 (class 1259 OID 16974)
--- Name: fleet_details; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW fleet_details AS
- SELECT fleets.fleet_id AS id,
-    characters.name AS fc,
-    fleets.title,
-    fleets.description,
-    fleets.creation_time,
-    fleets.update_time,
-    fleet_checkpoints.count AS checkpoints,
-    fleet_checkpoints.last_updated,
-    fleet_participation.count AS members,
-    logins.username AS creator
-   FROM fleets,
-    characters,
-    logins,
-    fleet_checkpoints,
-    fleet_participation
-  WHERE ((fleets.fc_character_id = characters.character_id) AND (fleets.fleet_id = fleet_checkpoints.fleet_id) AND (fleets.fleet_id = fleet_participation.fleet_id) AND (fleets.fleet_creator = logins.id));
-
-
---
--- TOC entry 196 (class 1259 OID 16784)
+-- TOC entry 206 (class 1259 OID 17046)
 -- Name: fleet_summary; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -309,7 +285,7 @@ CREATE VIEW fleet_summary AS
 
 
 --
--- TOC entry 197 (class 1259 OID 16788)
+-- TOC entry 195 (class 1259 OID 16788)
 -- Name: fleets_fleet_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -322,8 +298,8 @@ CREATE SEQUENCE fleets_fleet_id_seq
 
 
 --
--- TOC entry 2250 (class 0 OID 0)
--- Dependencies: 197
+-- TOC entry 2245 (class 0 OID 0)
+-- Dependencies: 195
 -- Name: fleets_fleet_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -331,7 +307,7 @@ ALTER SEQUENCE fleets_fleet_id_seq OWNED BY fleets.fleet_id;
 
 
 --
--- TOC entry 199 (class 1259 OID 16793)
+-- TOC entry 197 (class 1259 OID 16793)
 -- Name: logins_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -344,8 +320,8 @@ CREATE SEQUENCE logins_id_seq
 
 
 --
--- TOC entry 2251 (class 0 OID 0)
--- Dependencies: 199
+-- TOC entry 2246 (class 0 OID 0)
+-- Dependencies: 197
 -- Name: logins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -353,7 +329,7 @@ ALTER SEQUENCE logins_id_seq OWNED BY logins.id;
 
 
 --
--- TOC entry 200 (class 1259 OID 16795)
+-- TOC entry 198 (class 1259 OID 16795)
 -- Name: members_fleets; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -367,7 +343,7 @@ ALTER TABLE ONLY members_fleets REPLICA IDENTITY NOTHING;
 
 
 --
--- TOC entry 201 (class 1259 OID 16798)
+-- TOC entry 199 (class 1259 OID 16798)
 -- Name: members_paps; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -381,7 +357,7 @@ ALTER TABLE ONLY members_paps REPLICA IDENTITY NOTHING;
 
 
 --
--- TOC entry 202 (class 1259 OID 16801)
+-- TOC entry 200 (class 1259 OID 16801)
 -- Name: members_summary; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -397,7 +373,7 @@ CREATE VIEW members_summary AS
 
 
 --
--- TOC entry 203 (class 1259 OID 16805)
+-- TOC entry 201 (class 1259 OID 16805)
 -- Name: pap_count; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -410,7 +386,7 @@ ALTER TABLE ONLY pap_count REPLICA IDENTITY NOTHING;
 
 
 --
--- TOC entry 204 (class 1259 OID 16808)
+-- TOC entry 202 (class 1259 OID 16808)
 -- Name: paps_pap_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -423,8 +399,8 @@ CREATE SEQUENCE paps_pap_id_seq
 
 
 --
--- TOC entry 2252 (class 0 OID 0)
--- Dependencies: 204
+-- TOC entry 2247 (class 0 OID 0)
+-- Dependencies: 202
 -- Name: paps_pap_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -432,7 +408,7 @@ ALTER SEQUENCE paps_pap_id_seq OWNED BY paps.pap_id;
 
 
 --
--- TOC entry 2079 (class 2604 OID 16810)
+-- TOC entry 2075 (class 2604 OID 16810)
 -- Name: characters character_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -440,7 +416,7 @@ ALTER TABLE ONLY characters ALTER COLUMN character_id SET DEFAULT nextval('chara
 
 
 --
--- TOC entry 2084 (class 2604 OID 16811)
+-- TOC entry 2080 (class 2604 OID 16811)
 -- Name: checkpoints checkpoint_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -448,7 +424,7 @@ ALTER TABLE ONLY checkpoints ALTER COLUMN checkpoint_id SET DEFAULT nextval('che
 
 
 --
--- TOC entry 2085 (class 2604 OID 16812)
+-- TOC entry 2081 (class 2604 OID 16812)
 -- Name: fleet_categories type_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -456,7 +432,7 @@ ALTER TABLE ONLY fleet_categories ALTER COLUMN type_id SET DEFAULT nextval('flee
 
 
 --
--- TOC entry 2083 (class 2604 OID 16813)
+-- TOC entry 2078 (class 2604 OID 16813)
 -- Name: fleets fleet_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -464,7 +440,7 @@ ALTER TABLE ONLY fleets ALTER COLUMN fleet_id SET DEFAULT nextval('fleets_fleet_
 
 
 --
--- TOC entry 2087 (class 2604 OID 16814)
+-- TOC entry 2083 (class 2604 OID 16814)
 -- Name: logins id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -472,7 +448,7 @@ ALTER TABLE ONLY logins ALTER COLUMN id SET DEFAULT nextval('logins_id_seq'::reg
 
 
 --
--- TOC entry 2086 (class 2604 OID 16815)
+-- TOC entry 2082 (class 2604 OID 16815)
 -- Name: paps pap_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -480,7 +456,7 @@ ALTER TABLE ONLY paps ALTER COLUMN pap_id SET DEFAULT nextval('paps_pap_id_seq':
 
 
 --
--- TOC entry 2089 (class 2606 OID 16817)
+-- TOC entry 2085 (class 2606 OID 16817)
 -- Name: characters characters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -489,7 +465,7 @@ ALTER TABLE ONLY characters
 
 
 --
--- TOC entry 2098 (class 2606 OID 16819)
+-- TOC entry 2094 (class 2606 OID 16819)
 -- Name: checkpoints checkpoints_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -498,7 +474,7 @@ ALTER TABLE ONLY checkpoints
 
 
 --
--- TOC entry 2101 (class 2606 OID 16821)
+-- TOC entry 2097 (class 2606 OID 16821)
 -- Name: fleet_categories fleet_catagories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -507,7 +483,7 @@ ALTER TABLE ONLY fleet_categories
 
 
 --
--- TOC entry 2096 (class 2606 OID 16823)
+-- TOC entry 2092 (class 2606 OID 16823)
 -- Name: fleets fleet_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -516,7 +492,7 @@ ALTER TABLE ONLY fleets
 
 
 --
--- TOC entry 2105 (class 2606 OID 16825)
+-- TOC entry 2101 (class 2606 OID 16825)
 -- Name: logins id_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -525,7 +501,7 @@ ALTER TABLE ONLY logins
 
 
 --
--- TOC entry 2107 (class 2606 OID 16827)
+-- TOC entry 2103 (class 2606 OID 16827)
 -- Name: logins login_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -534,7 +510,7 @@ ALTER TABLE ONLY logins
 
 
 --
--- TOC entry 2091 (class 2606 OID 16829)
+-- TOC entry 2087 (class 2606 OID 16829)
 -- Name: characters name_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -543,7 +519,7 @@ ALTER TABLE ONLY characters
 
 
 --
--- TOC entry 2103 (class 2606 OID 16831)
+-- TOC entry 2099 (class 2606 OID 16831)
 -- Name: paps paps_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -552,7 +528,7 @@ ALTER TABLE ONLY paps
 
 
 --
--- TOC entry 2099 (class 1259 OID 17001)
+-- TOC entry 2095 (class 1259 OID 17001)
 -- Name: fki_creator_fkey; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -560,7 +536,7 @@ CREATE INDEX fki_creator_fkey ON checkpoints USING btree (creator);
 
 
 --
--- TOC entry 2092 (class 1259 OID 16832)
+-- TOC entry 2088 (class 1259 OID 16832)
 -- Name: fki_creator_id_constraint; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -568,7 +544,7 @@ CREATE INDEX fki_creator_id_constraint ON fleets USING btree (fleet_creator);
 
 
 --
--- TOC entry 2093 (class 1259 OID 16833)
+-- TOC entry 2089 (class 1259 OID 16833)
 -- Name: fki_fc_id_constraint; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -576,7 +552,7 @@ CREATE INDEX fki_fc_id_constraint ON fleets USING btree (fc_character_id);
 
 
 --
--- TOC entry 2094 (class 1259 OID 16834)
+-- TOC entry 2090 (class 1259 OID 16834)
 -- Name: fki_fleet_type_fkey; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -584,7 +560,7 @@ CREATE INDEX fki_fleet_type_fkey ON fleets USING btree (fleet_type);
 
 
 --
--- TOC entry 2234 (class 2618 OID 16835)
+-- TOC entry 2228 (class 2618 OID 16835)
 -- Name: pap_count _RETURN; Type: RULE; Schema: public; Owner: -
 --
 
@@ -599,7 +575,7 @@ CREATE RULE "_RETURN" AS
 
 
 --
--- TOC entry 2235 (class 2618 OID 16836)
+-- TOC entry 2229 (class 2618 OID 16836)
 -- Name: members_fleets _RETURN; Type: RULE; Schema: public; Owner: -
 --
 
@@ -618,7 +594,7 @@ CREATE RULE "_RETURN" AS
 
 
 --
--- TOC entry 2236 (class 2618 OID 16837)
+-- TOC entry 2230 (class 2618 OID 16837)
 -- Name: members_paps _RETURN; Type: RULE; Schema: public; Owner: -
 --
 
@@ -633,7 +609,7 @@ CREATE RULE "_RETURN" AS
 
 
 --
--- TOC entry 2111 (class 2606 OID 17002)
+-- TOC entry 2107 (class 2606 OID 17002)
 -- Name: checkpoints creator_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -642,7 +618,7 @@ ALTER TABLE ONLY checkpoints
 
 
 --
--- TOC entry 2108 (class 2606 OID 16838)
+-- TOC entry 2104 (class 2606 OID 16838)
 -- Name: fleets creator_id_constraint; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -651,7 +627,7 @@ ALTER TABLE ONLY fleets
 
 
 --
--- TOC entry 2109 (class 2606 OID 16843)
+-- TOC entry 2105 (class 2606 OID 16843)
 -- Name: fleets fc_id_constraint; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -660,7 +636,7 @@ ALTER TABLE ONLY fleets
 
 
 --
--- TOC entry 2110 (class 2606 OID 16848)
+-- TOC entry 2106 (class 2606 OID 16848)
 -- Name: fleets fleet_type_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -668,7 +644,7 @@ ALTER TABLE ONLY fleets
     ADD CONSTRAINT fleet_type_fkey FOREIGN KEY (fleet_type) REFERENCES fleet_categories(type_id);
 
 
--- Completed on 2017-02-14 02:37:12
+-- Completed on 2017-02-14 13:31:57
 
 --
 -- PostgreSQL database dump complete
