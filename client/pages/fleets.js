@@ -31,7 +31,7 @@ router.pages["fleets"].handler = function() {
                     cont += "<td>&#x221e;</td>"
                 } else {
                     var created = new Date(d.last_updated);
-                    console.log(created);
+                    //console.log(created);
                     var seconds = (Date.now() - created + created.getTimezoneOffset() * 60 * 1000) / 1000;
 
                     if (seconds < 60) {
