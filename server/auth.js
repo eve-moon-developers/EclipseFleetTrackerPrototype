@@ -6,6 +6,11 @@ const AuthCache = new NodeCache({
     checkperiod: 60
 });
 
+const IDCache = new NodeCache({
+    stdTTL: 86400 * 2,
+    checkperiod: 60
+});
+
 const crypto = require('crypto');
 const bcrypt = require('bcrypt-nodejs');
 const util = require('util');
@@ -34,6 +39,10 @@ module.exports.get = function(token) {
         //This includes revoking permissions and bullshit like that.
         return auth;
     }
+}
+
+module.exports.expire = function(user_id) {
+
 }
 
 module.exports.login = function(auth) {
@@ -75,6 +84,10 @@ module.exports.login = function(auth) {
                 ret.token = token;
 
                 AuthCache.set(token, ret);
+                if (IDCache.get(ret.id)) {
+                    AuthCache.del(IDCache.get(ret.id));
+                }
+                IDCache.set(ret.id, token);
 
                 return pg_pool.query("UPDATE logins SET last_login=now() at time zone 'utc' WHERE id=$1", [ret.id]).then(res => {
                     return ret;

@@ -46,6 +46,19 @@
         </div>
         <div class="three columns" id="main-status-badge">Please enable scripts...</div>
     </div>
+    <div id="development_warning_text_box" class="container warn-weak-text warn-background note-block">
+        <div>This site is currently under active development. If you are experiencing issues, please refresh the page. Send Peacekeeper feedback and bugs so that he can improve the site!<br>Note:</div>
+        <ul>
+            <li>Links may break or lead to nothing.</li>
+            <li>Your auth token may expire unexpectedly.</li>
+            <li>There may be unhandled errors.</li>
+            <li class="warn-strong-text">There are no undo buttons.</li>
+            <li>Also this site uses "cookies".</li>
+        </ul>
+        <div>
+            <button onclick="$('#development_warning_text_box').slideUp();">Acknowledge</button>
+        </div>
+    </div>
     <div class="container" id="main-menu-div" hidden>
         <div class="three columns">
             <button id="button-nav-fleets" class="u-full-width">Fleets</button>

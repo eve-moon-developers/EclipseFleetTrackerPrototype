@@ -1,15 +1,38 @@
-<table class="u-full-width">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Username</th>
-            <th>Rank</th>
-            <th>Created</th>
-            <th>Modified</th>
-            <th>Last Login</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody id="view-logins-body">
-    </tbody>
-</table>
+<div class="row">
+    <div class="twelve columns">
+        <h2>Fleet Tool User Management</h2>
+        <p>You may add, remove, or update users on this page.</p>
+        <div class="warn-weak-text warn-background note-block">
+            <div>You may not edit users with an equal or higher rank than you.</div>
+            <div>Any actions on this page are final. <span class="warn-strong-text">There are no undo buttons.</span></div>
+        </div>
+    </div>
+</div>
+<div class="row minor-section">
+    <div class="six columns">
+        <button class="u-full-width">ADD NEW USER</button>
+    </div>
+    <div class="six columns">
+        <button class="u-full-width">CLEAR AUTH CACHE</button>
+    </div>
+</div>
+<div class="row">
+    <div class="twelve columns">
+        <h4 class="minor-section break-line">Current Users</h4>
+        <table class="u-full-width">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Rank</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>Last Login</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="view-logins-body">
+            </tbody>
+        </table>
+    </div>
+</div>
