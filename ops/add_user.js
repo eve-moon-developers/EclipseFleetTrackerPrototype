@@ -15,7 +15,7 @@ require("server/database.js").start_pg().then(function() {
 
     var query = "INSERT INTO logins AS l (username, hash, rank, created) VALUES ('" +
         process.argv[3] + "','" + hash + "','" + process.argv[5] +
-        "', now() at time zone 'utc' ) ON CONFLICT (username) DO UPDATE SET hash=EXCLUDED.hash, modified=now() at time zone 'utc' RETURNING modified";
+        "', now() at time zone 'utc' ) ON CONFLICT (username) DO UPDATE SET hash=EXCLUDED.hash, rank=EXCLUDED.rank, modified=now() at time zone 'utc' RETURNING modified";
 
     pg_pool.query(query, function(err, res) {
         if (err) {
