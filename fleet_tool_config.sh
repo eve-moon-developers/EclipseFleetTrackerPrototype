@@ -8,4 +8,6 @@ export NODE_PATH=$NODE_PATH:./
 
 export PORT="8000";
 
+export DEBUG_AUTH="FALSE"
+
 node ./server.js $@
