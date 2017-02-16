@@ -22,6 +22,8 @@ router.pages["fleets/view"].handler = function() {
 
         router.clear_buttons();
 
+        var fleet_details;
+
         $("#button-delete-fleet").click(function() {
             $("#button-delete-fleet").prop("disabled", true);
 
@@ -30,12 +32,12 @@ router.pages["fleets/view"].handler = function() {
             package.auth = ft.ident;
             package.fleet_id = router.hash[1];
 
-            $.post("/api/fleet/delete", package, function(data) {
-                console.log(data);
-
-                if (!alert("Check the console for results.")) {
-                    router.load("fleets/list");
-                }
+            $.post("/api/fleet/delete", package).done(function(data) {
+                ft.modal.setup("Buh bye!", "The fleet \"" + fleet_details.fleet.title + "\" was deleted.<br>Click anywhere grey, or the red X to continue.");
+                ft.modal.doShow(true, () => router.load("fleets/list"));
+            }).fail(function(xhr, status, error) {
+                ft.modal.setup("Fml. That didn't work!", "The server returned:<br><br>" + xhr.responseText + "<br><br>Taking you back to the fleet listing.<br>Click anywhere grey, or the red X to continue.");
+                ft.modal.doShow(true, () => router.load("fleets/list"));
             });
         });
 
@@ -48,6 +50,7 @@ router.pages["fleets/view"].handler = function() {
             console.log("!!!!!!!!!!!!!!");
             console.log("Fleet data");
             console.log(data);
+            fleet_details = data;
         });
     }
 }

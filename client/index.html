@@ -28,6 +28,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
     <script src="src/site_init.js"></script>
 
     <!-- Favicon
@@ -48,7 +49,10 @@
         <div class="three columns" id="main-status-badge">Please enable scripts...</div>
     </div>
     <div id="development_warning_text_box" class="container warn-weak-text warn-background note-block">
-        <div>This site is currently under active development. If you are experiencing issues, please refresh the page. Send Peacekeeper feedback and bugs so that he can improve the site!<br>Note:</div>
+        <h5>This site is currently under active development!</h5>
+        <p>If you are experiencing issues, refresh the page. Send Peacekeeper feedback and bugs so that he can improve the site!
+        </p>
+        <h5>Note:</h5>
         <ul>
             <li>Links may break or lead to nothing.</li>
             <li>Your auth token may expire unexpectedly.</li>
@@ -72,6 +76,22 @@
         </div>
         <div class="three columns">
             <button id="button-nav-user" class="u-full-width" disabled>Dashboard</button>
+        </div>
+    </div>
+    <!-- The Modal -->
+    <div class="modal-container" id="modal-container" hidden>
+        <div class="modal-outline" id="modal-outline">
+        </div>
+        <div class="container modal-content">
+            <div class="row">
+                <h4 class="eleven columns" id="modal-title">
+                    Modal Title.
+                </h4>
+                <h5 class="modal-close-button one columns" id="modal-close-button">&#10006;</h5>
+            </div>
+            <div class="row break-line" id="modal-content">
+                Modal Content
+            </div>
         </div>
     </div>
     <div class="container" id="main-body-div" hidden>

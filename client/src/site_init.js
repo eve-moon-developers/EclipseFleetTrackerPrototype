@@ -35,6 +35,45 @@ function bootstrap() {
 
     check_support();
 
+
+    // Modal
+    ft.modal = {};
+    ft.modal.title = $("#modal-title");
+    ft.modal.content = $("#modal-content");
+    ft.modal.close = $("#modal-close-button");
+    ft.modal.outline = $("#modal-outline");
+    ft.modal.container = $("#modal-container");
+
+    ft.modal.doSafeClose = function() {
+        if (ft.modal.before_close && _.isFunction(ft.modal.before_close)) {
+            Promise.resolve(ft.modal.before_close()).then(t => ft.modal.container.hide(), t => ft.modal.container.hide);
+        } else {
+            ft.modal.container.hide();
+        }
+    }
+
+    ft.modal.doClose = function() {
+        ft.modal.container.hide();
+    }
+
+    ft.modal.setup = function(title, content) {
+        ft.modal.title.html(title);
+        ft.modal.content.html(content);
+    }
+
+    ft.modal.doShow = function(allowClickOff, optional_callback) {
+        if (allowClickOff == false) {
+            ft.modal.outline.off("click", ft.modal.doSafeClose);
+        } else {
+            ft.modal.outline.on("click", ft.modal.doSafeClose);
+        }
+        ft.modal.before_close = optional_callback;
+        ft.modal.container.show();
+    }
+
+    ft.modal.close.click(ft.modal.doSafeClose);
+
+
     //Load auth.
     $.getScript("src/auth.js").then(function() {
         init_client_auth();

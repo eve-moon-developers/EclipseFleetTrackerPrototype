@@ -24,7 +24,7 @@ module.exports.start_auth = function() {
             "valid": true,
             "ident": "MOON Developer",
             "id": 1,
-            "rank": 100,
+            "rank": 10,
             "token": "dev-auth-token"
         });
     }

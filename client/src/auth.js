@@ -41,8 +41,8 @@ function succeed_login(data) {
 }
 
 function fail_login(data) {
-    alert("You failed login.");
-    setup_login();
+    ft.modal.setup("Whoops! That wasn't quite right.", "Your username or password was incorrect.<br><br><br>Click the grey area or the red X to try again.");
+    ft.modal.doShow(true, () => setup_login());
 }
 
 function submit_credentials() {
@@ -54,7 +54,7 @@ function submit_credentials() {
 
     ft.status.set("Validating credentials...");
 
-    ft.page.section.body.html("<h4>Verifying...</h4>");
+    //ft.page.section.body.html("<h4>Verifying...</h4>");
 
     var username = username_field.val();
     var password = password_field.val();

@@ -31,7 +31,8 @@ router.pages["fleets/update"].handler = function() {
             var members = $("#fleet-checkpoint-member-input");
             $("#submit-fleet-update-button").click(function(e) {
                 if (members.val().length == 0) {
-                    alert("You need to add at least 1 member to the checkpoint list.");
+                    ft.modal.setup("Duhhhh.... Filthy??? Is that you???", "You need to add at least 1 member to the checkpoint list.<br>Click anywhere grey, or the red X to continue.");
+                    ft.modal.doShow(true);
                 } else {
                     var package = {};
                     package.auth = ft.ident;
@@ -41,10 +42,12 @@ router.pages["fleets/update"].handler = function() {
 
                     $.post("/api/fleet/update", package, function(result) {
                         console.log(result);
-                        if (result.invalid && !alert("Checkpoint not added: " + result.msg)) {
-                            router.load("dashboard");
-                        } else if (!alert("Checkpoint added.")) {
-                            router.reload();
+                        if (result.invalid) {
+                            ft.modal.setup("Aww shit...", "Fleet update did NOT post. <br>Please contact Peacekeeper. Or dont. It's probably your fault.<br>Since this failed, I'm taking you back to the dashboard. <br>Click anywhere grey, or the red X to continue.");
+                            ft.modal.doShow(true, () => router.load("dashboard"));
+                        } else {
+                            ft.modal.setup("Woot woot!", "Fleet update posted.<br>Click anywhere grey, or the red X to continue.");
+                            ft.modal.doShow(true, () => router.reload());
                         }
                     });
                 }
