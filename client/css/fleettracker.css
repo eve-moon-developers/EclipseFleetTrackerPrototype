@@ -39,15 +39,21 @@ input[type="button"]:disabled {
     margin-top: 5rem;
 }
 
+.mini-space {
+    margin-top: 2.5rem;
+}
+
 .break-line {
     border-top-width: 0;
     border-top: 1px solid #E1E1E1;
     padding-top: 2.5rem;
 }
 
-.warn-strong-text {
-    color: #ff6666;
-    font-weight: bold;
+.break-line-section {
+    border-top-width: 0;
+    border-top: 1px solid #E1E1E1;
+    padding-top: 2.5rem;
+    margin-top: 2.5rem;
 }
 
 .warn-weak-text {
@@ -62,6 +68,13 @@ input[type="button"]:disabled {
     margin-top: 1.5rem;
     padding: 2.5rem;
     background-color: #fff9f7;
+    border-radius: 2rem;
+    border: 1px solid dimgrey;
+}
+
+.sub-panel {
+    margin-top: 1.5rem;
+    padding: 2.5rem;
     border-radius: 2rem;
     border: 1px solid dimgrey;
 }

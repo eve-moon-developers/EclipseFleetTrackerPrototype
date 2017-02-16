@@ -1,18 +1,37 @@
 router.pages["admin/list"] = {};
 
-router.pages["admin/list"].delete_user = function(id, scope) {
+router.pages["admin/list"].show_add_user = function() {
+    var template = $("#add-new-user-template").html();
+    ft.modal.setup("Add a User", template);
+    ft.modal.doShow();
+}
+
+router.pages["admin/list"].add_user = function() {
+
+    var username = $("#newUserInputUsername").val();
+    var password = $("#newUserInputPassword").val();
+    var rank = $("#newUserInputRank").val();
+
+    if (username.length < 4) {
+        ft.modal.setup("Error!", "You must supply a username.");
+        ft.modal.doShow();
+    } else if (password.length < 4) {
+        ft.modal.setup("Error!", "You must supply a password.");
+        ft.modal.doShow();
+    } else if (rank === undefined || rank > 15) {
+        ft.modal.setup("Error!", "You must supply a rank.");
+        ft.modal.doShow();
+    } else {
+        ft.modal.doClose();
+    }
 
 }
 
-router.pages["admin/list"].change_password = function(id, scope) {
+router.pages["admin/list"].update_user = function(id, scope) {
 
 }
 
-router.pages["admin/list"].change_rank = function(id, scope) {
-
-}
-
-router.pages["admin/list"].add_user = function(id) {
+router.pages["admin/list"].clear_auth = function(id, scope) {
 
 }
 
@@ -99,9 +118,7 @@ router.pages["admin/list"].handler = function() {
                 }
                 */
                 if (d.rank < ft.ident.rank) {
-                    cont += "<td><button>Rank</button></td>";
-                    cont += "<td><button>Password</button></td>";
-                    cont += "<td><button>Delete</button></td>";
+                    cont += "<td><button class='u-full-width'>Update</button></td>";
                 }
                 cont += "</tr>"
             }
