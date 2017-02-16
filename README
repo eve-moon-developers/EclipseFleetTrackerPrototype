@@ -28,3 +28,9 @@ Security:
     Without an auth token, nothing but the login page can be loaded.
     All API calls must have an accompanying auth token with sufficient permissions.
     For now there are no seperate permission levels.
+
+Automatic login - Development Mode Only
+    If you have the auth token added in /server/auth.js enabled, you may log in automatically.
+    You need to browse to the website after you start the server, and set your auth token manually.
+    Do so by opening the console and running:
+        localStorage.setItem("EclipseFleetTrackerAuthToken", "dev-auth-token");

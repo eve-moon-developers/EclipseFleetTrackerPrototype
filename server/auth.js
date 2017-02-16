@@ -19,13 +19,13 @@ module.exports.start_auth = function() {
     console.log("Booting auth system...");
 
     //Insert the dev token.
-    if (false) {
-        AuthCache.set("auth-token", {
+    if (true) {
+        AuthCache.set("dev-auth-token", {
             "valid": true,
             "ident": "MOON Developer",
             "id": 1,
             "rank": 100,
-            "token": "auth-token"
+            "token": "dev-auth-token"
         });
     }
 };
