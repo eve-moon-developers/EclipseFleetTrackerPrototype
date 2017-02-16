@@ -4,7 +4,7 @@ var util = require('util');
 var restify = require('restify');
 
 function list_users(res, next) {
-    pg_pool.query("SELECT * FROM logins ORDER BY id ASC").then(value => {
+    pg_pool.query("SELECT * FROM logins ORDER BY id DESC").then(value => {
         res.send(value.rows);
         next();
     })

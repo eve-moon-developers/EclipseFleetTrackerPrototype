@@ -20,12 +20,12 @@ module.exports.start_auth = function() {
 
     //Insert the dev token.
     if (false) {
-        AuthCache.set("wcj", {
+        AuthCache.set("auth-token", {
             "valid": true,
-            "ident": "Peacekeeper-Dev",
+            "ident": "MOON Developer",
             "id": 1,
             "rank": 100,
-            "token": "wcj"
+            "token": "auth-token"
         });
     }
 };

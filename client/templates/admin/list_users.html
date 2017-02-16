@@ -10,10 +10,16 @@
 </div>
 <div class="row minor-section">
     <div class="six columns">
-        <button class="u-full-width">ADD NEW USER</button>
+        <button class="u-full-width" onclick="this.disabled=true; $('#div-add-user-block').slideDown();">ADD NEW USER</button>
     </div>
     <div class="six columns">
         <button class="u-full-width">CLEAR AUTH CACHE</button>
+    </div>
+</div>
+<div class="row minor-section warn-background note-block" id="div-add-user-block" hidden>
+    <div class="twelve columns">
+        TEST TEST TEST
+        <button class="u-full-width">SUBMIT</button>
     </div>
 </div>
 <div class="row">

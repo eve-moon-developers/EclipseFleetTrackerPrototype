@@ -2,7 +2,7 @@
 
 export PGUSER="fleettool";
 export PGDATABASE="EclipseFleetTracker";
-export PGPASSWORD="helloworld";
+export PGPASSWORD="HelloWorld";
 export PGPORT="5432";
 export NODE_PATH=$NODE_PATH:./
 
