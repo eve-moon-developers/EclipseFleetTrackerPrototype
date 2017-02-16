@@ -28,11 +28,21 @@ router.pages["admin/list"].add_user = function() {
 }
 
 router.pages["admin/list"].update_user = function(id, scope) {
+    var me = router.pages["admin/list"];
+    ft.modal.setup("Update user: " + me.user_list[id].username, "This hasn't been implemented.");
+    ft.modal.doShow();
+}
 
+router.pages["admin/list"].delete_user = function(id, scope) {
+    var me = router.pages["admin/list"];
+    ft.modal.setup("Delete user: " + me.user_list[id].username, "This hasn't been implemented.");
+    ft.modal.doShow();
 }
 
 router.pages["admin/list"].clear_auth = function(id, scope) {
-
+    var me = router.pages["admin/list"];
+    ft.modal.setup("Clear Auth Cache", "This hasn't been implemented.");
+    ft.modal.doShow();
 }
 
 router.pages["admin/list"].handler = function() {
@@ -54,9 +64,15 @@ router.pages["admin/list"].handler = function() {
         var tdiv = $("#view-logins-body");
 
         $.get("/api/admin/list", { auth: ft.ident }).then(data => {
+
+            me.user_list = {};
+
             console.log(data);
             var cont = "";
             for (d of data) {
+
+                me.user_list[d.id] = d;
+
                 cont += "<tr>";
                 cont += "<td>" + d.id + "</td>";
                 cont += "<td>" + d.username + "</td>";
@@ -80,45 +96,9 @@ router.pages["admin/list"].handler = function() {
                     }
                 }
 
-                /*
-                if (d.modified == null) {
-                    cont += "<td>&#x221e;</td>"
-                } else {
-                    var created = new Date(d.modified);
-                    //console.log(created);
-                    var seconds = (Date.now() - created) / 1000;
-
-                    if (seconds < 60) {
-                        cont += "<td>" + Math.floor(seconds) + "s</td>";
-                    } else if (seconds < 3600) {
-                        cont += "<td>" + Math.floor(seconds / 60) + "m</td>";
-                    } else if (seconds < 86400) {
-                        cont += "<td>" + Math.floor(seconds / 3600) + "h</td>";
-                    } else {
-                        cont += "<td>" + Math.floor(seconds / 86400) + "d</td>";
-                    }
-                }
-
-                if (d.last_login == null) {
-                    cont += "<td>&#x221e;</td>"
-                } else {
-                    var created = new Date(d.last_login);
-                    //console.log(created);
-                    var seconds = (Date.now() - created) / 1000;
-
-                    if (seconds < 60) {
-                        cont += "<td>" + Math.floor(seconds) + "s</td>";
-                    } else if (seconds < 3600) {
-                        cont += "<td>" + Math.floor(seconds / 60) + "m</td>";
-                    } else if (seconds < 86400) {
-                        cont += "<td>" + Math.floor(seconds / 3600) + "h</td>";
-                    } else {
-                        cont += "<td>" + Math.floor(seconds / 86400) + "d</td>";
-                    }
-                }
-                */
                 if (d.rank < ft.ident.rank) {
-                    cont += "<td><button class='u-full-width'>Update</button></td>";
+                    cont += "<td><button class='u-full-width' onclick='router.pages[\"admin/list\"].update_user(" + d.id + ", this)'>Update</button></td>";
+                    cont += "<td><button class='u-full-width warn-background' onclick='router.pages[\"admin/list\"].delete_user(" + d.id + ", this)'>Delete</button></td>";
                 }
                 cont += "</tr>"
             }
