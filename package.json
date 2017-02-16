@@ -18,10 +18,14 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "bufferutil": "^2.0.1",
     "crypto": "0.0.3",
+    "discord.js": "^11.0.0",
+    "erlpack": "github:hammerandchisel/erlpack",
     "node-cache": "^4.1.1",
     "pg": "^6.1.2",
     "restify": "^4.3.0",
-    "util": "^0.10.3"
+    "util": "^0.10.3",
+    "uws": "^0.12.0"
   }
 }
