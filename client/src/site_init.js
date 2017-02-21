@@ -43,6 +43,7 @@ function bootstrap() {
     ft.modal.close = $("#modal-close-button");
     ft.modal.outline = $("#modal-outline");
     ft.modal.container = $("#modal-container");
+    ft.modal.box = $("#modal-box");
 
     ft.modal.doSafeClose = function() {
         if (ft.modal.before_close && _.isFunction(ft.modal.before_close)) {

@@ -1,5 +1,10 @@
 //Module Variables
 const NodeCache = require("node-cache");
+const crypto = require('crypto');
+const bcrypt = require('bcrypt-nodejs');
+const util = require('util');
+const pg_pool = require("server/database.js").pg_pool;
+const restify = require('restify');
 
 const AuthCache = new NodeCache({
     stdTTL: 86400,
@@ -10,10 +15,6 @@ const IDCache = new NodeCache({
     stdTTL: 86400 * 2,
     checkperiod: 60
 });
-
-const crypto = require('crypto');
-const bcrypt = require('bcrypt-nodejs');
-const util = require('util');
 
 module.exports.start_auth = function() {
     console.log("Booting auth system...");
@@ -50,7 +51,7 @@ module.exports.expire_all = function() {
     AuthCache.flushAll();
 }
 
-module.exports.change_password = function(user_id, new_password) {
+module.exports.change_password = function(user_id, new_password, res) {
     module.exports.expire(user_id);
     //Insert the dev token.
     if (process.env.DEBUG_AUTH === "TRUE") {
@@ -63,6 +64,14 @@ module.exports.change_password = function(user_id, new_password) {
         });
         IDCache.set(1, "dev-auth-token");
     }
+
+    new_password = bcrypt.hashSync(escape(new_password), bcrypt.genSaltSync());
+
+    return pg_pool.query("UPDATE logins SET hash=$1, modified=now() at time zone 'utc' WHERE id=$2", [new_password, user_id]).then(data => res.send("Done.")).catch(function(error) {
+        res.send(new restify.InternalServerError(error));
+        console.log("Error updating login: ");
+        console.log(util.inspect(error));
+    });
 }
 
 module.exports.login = function(auth) {
