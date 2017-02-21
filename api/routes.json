@@ -1,0 +1,24 @@
+[
+    ["get", "/admin/list"],
+    ["post", "/admin/add"],
+    ["post", "/admin/update/rank"],
+    ["post", "/admin/update/password"],
+    ["post", "/admin/delete"],
+
+    ["post", "/login/get"],
+    ["post", "/login/check"],
+    ["post", "/login/change"],
+
+    ["get", "/fleet/categories"],
+    ["get", "/fleet/basic"],
+    ["get", "/fleet/listing"],
+    ["get", "/fleet/details"],
+    ["get", "/fleet/checkpoint_details"],
+    ["post", "/fleet/create"],
+    ["post", "/fleet/update"],
+    ["post", "/fleet/delete"],
+
+    ["get", "/members/listing"],
+
+    ["get", "/util/random_members"]
+]
