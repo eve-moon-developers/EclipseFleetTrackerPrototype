@@ -43,8 +43,10 @@ module.exports.expire = function(user_id) {
     }
 
     var token = IDCache.get(user_id);
-    IDCache.del(user_id);
-    AuthCache.del(token);
+    if (token != undefined) {
+        IDCache.del(user_id);
+        AuthCache.del(token);
+    }
 }
 
 module.exports.expire_all = function() {
@@ -67,11 +69,61 @@ module.exports.change_password = function(user_id, new_password, res) {
 
     new_password = bcrypt.hashSync(escape(new_password), bcrypt.genSaltSync());
 
-    return pg_pool.query("UPDATE logins SET hash=$1, modified=now() at time zone 'utc' WHERE id=$2", [new_password, user_id]).then(data => res.send("Done.")).catch(function(error) {
-        res.send(new restify.InternalServerError(error));
-        console.log("Error updating login: ");
-        console.log(util.inspect(error));
+    pg_pool.query("SELECT id FROM logins WHERE id=$1", [user_id]).then(data => {
+        if (data.rows.length == 0) {
+            next(new restify.InvalidArgumentError('User does not exist!'));
+        } else {
+            pg_pool.query("UPDATE logins SET hash=$1, modified=now() at time zone 'utc' WHERE id=$2", [new_password, user_id]).then(data => {
+                res.send("Done.");
+                module.exports.expire(user_id);
+            }).catch(function(error) {
+                res.send(new restify.InternalServerError(error));
+                console.log("Error updating login: ");
+                console.log(util.inspect(error));
+            });
+        }
     });
+}
+
+module.exports.add_user = function(params, res, next) {
+    pg_pool.query("SELECT * FROM logins WHERE username=$1", [params.username]).then(data => {
+        if (data.rows.length > 0) {
+            return next(new restify.InvalidArgumentError('User already exists!'));
+        } else {
+            var password = bcrypt.hashSync(escape(params.password), bcrypt.genSaltSync());
+            var username = params.username;
+            var rank = params.rank;
+
+            var query = "INSERT INTO logins AS l (username, hash, rank, created) VALUES ($1, $2, $3, now() at time zone 'utc')";
+
+            pg_pool.query(query, [username, password, rank]).then(data => {
+                res.send("Done!");
+                return next();
+            });
+        }
+    });
+}
+
+module.exports.update_user_rank = function(params, res, next) {
+
+    var user_id = params.user_id;
+    var rank = params.rank;
+
+    return pg_pool.query("SELECT id FROM logins WHERE id=$1", [user_id]).then(data => {
+        if (data.rows.length == 0) {
+            return next(new restify.InvalidArgumentError('User does not exist!'));
+        } else {
+            return pg_pool.query("UPDATE logins SET rank=$1, modified=now() at time zone 'utc' WHERE id=$2", [rank, user_id]).then(data => {
+                res.send("Done.");
+                module.exports.expire(user_id);
+            }).catch(function(error) {
+                console.log("Error updating login: ");
+                console.log(util.inspect(error));
+                res.send(new restify.InternalServerError(error));
+            });
+        }
+    });
+
 }
 
 module.exports.login = function(auth) {

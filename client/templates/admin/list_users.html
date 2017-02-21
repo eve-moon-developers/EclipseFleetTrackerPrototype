@@ -13,7 +13,7 @@
         <button class="u-full-width" onclick="this.disable; router.pages['admin/list'].show_add_user()">ADD NEW USER</button>
     </div>
     <div class="six columns">
-        <button class="u-full-width" onclick="router.pages['admin/list'].clear_auth()">CLEAR AUTH CACHE</button>
+        <button class="u-full-width" onclick="router.pages['admin/list'].clear_auth()" disabled>CLEAR AUTH CACHE</button>
     </div>
 </div>
 <div class="row">
@@ -37,22 +37,22 @@
 <div class="container sub-panel u-full-width" id="add-new-user-template" hidden>
     <div class="row">
         <div class="eight columns">
-            <label for="newUserInputUsername">Username</label>
+            <label for="newUserInputUsername">Username - >5 characters long</label>
             <input class="u-full-width" type="text" placeholder="Username" id="newUserInputUsername" tabindex="101" maxlength="64" required>
         </div>
         <div class="four columns ">
-            <label for="newUserInputRank ">Rank</label>
-            <input class="u-full-width " type="number" placeholder="Rank " id="newUserInputRank" tabindex="103" required>
+            <label for="newUserInputRank ">Rank - 0 to 10</label>
+            <input class="u-full-width " type="number" placeholder="Rank " id="newUserInputRank" tabindex="103" max="10" min="0" required>
         </div>
     </div>
     <div class="row mini-space">
         <div class="six columns">* Password automatically generated.</div>
         <div class="six columns u-pull-right ">
-            <button submit class="u-full-width " onclick="router.pages['admin/list'].add_user(); ">Submit</button>
+            <button submit class="u-full-width " id="submitNewUserButton" onclick="router.pages['admin/list'].add_user(); " disabled>Submit</button>
         </div>
     </div>
     <div class="row break-line mini-space">
-        <div class="twelve columns u-pull-right ">
+        <div class="twelve columns">
             <h5>Ranks</h5>
             <p>Currently ranks are a bit wishy washy.</p>
             <ul>
@@ -64,8 +64,16 @@
     </div>
 </div>
 <div id="update-user-template" hidden>
-    <div class="row">
-        <h5 class="eight columns">Reset user password: </h5>
-        <button class='u-pull-right four columns warn-background warn-strong-text'>RESET PASSWORD</button>
+    <div class="warn-weak-text warn-background note-block">
+        <h5 class="warn-strong-text" align="center">This section contains no confirmation prompts.<br>Please use caution.</h5>
+    </div>
+    <div class="row minor-section">
+        <span class="three columns">Update user rank:</span>
+        <input class="five columns" type="number" placeholder="Rank " id="update-user-rank" tabindex="103" min="0" max="10" required>
+        <button class='four columns' id="update-user-rank-button" disabled>SUBMIT</button>
+    </div>
+    <div class="row minor-section break-line">
+        <button class='five columns' id="unlock-reset-user-password-button">RESET PASSWORD</button>
+        <button class='five columns u-pull-right' id="reset-user-password-button" disabled>CONFIRM RESET</button>
     </div>
 </div>
