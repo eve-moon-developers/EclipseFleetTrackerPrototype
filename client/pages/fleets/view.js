@@ -3,14 +3,13 @@ router.pages["fleets/view"] = {};
 router.pages["fleets/view"].handler = function() {
 
     console.log("Loading fleet view page...");
-
+    var me = router.pages["fleets/view"];
     if (router.hash.length < 2) {
         router.error_message = "Can not view a non-existant fleet.";
         router.load("#error");
         return;
     }
 
-    var me = router.pages["fleets/view"];
     if (me.template === undefined) {
         $.get("templates/fleets/view_fleet.html", function(data) {
             me.template = data;
@@ -22,35 +21,55 @@ router.pages["fleets/view"].handler = function() {
 
         router.clear_buttons();
 
-        var fleet_details;
-
-        $("#button-delete-fleet").click(function() {
-            $("#button-delete-fleet").prop("disabled", true);
-
-            var package = {};
-
-            package.auth = ft.ident;
-            package.fleet_id = router.hash[1];
-
-            $.post("/api/fleet/delete", package).done(function(data) {
-                ft.modal.setup("Buh bye!", "The fleet \"" + fleet_details.fleet.title + "\" was deleted.<br>Click anywhere grey, or the red X to continue.");
-                ft.modal.doShow(true, () => router.load("fleets/list"));
-            }).fail(function(xhr, status, error) {
-                ft.modal.setup("Fml. That didn't work!", "The server returned:<br><br>" + xhr.responseText + "<br><br>Taking you back to the fleet listing.<br>Click anywhere grey, or the red X to continue.");
-                ft.modal.doShow(true, () => router.load("fleets/list"));
-            });
-        });
-
         $.get("/api/fleet/details", { auth: ft.ident, fleet_id: router.hash[1] }, function(data) {
-            if (!data || data.length === 0) {
-                router.error_message = "Can not view a non-existant fleet.";
-                router.load("#error");
-                return;
-            }
-            console.log("!!!!!!!!!!!!!!");
-            console.log("Fleet data");
-            console.log(data);
-            fleet_details = data;
+            var options = {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                timeZoneName: "short"
+            };
+
+            var ct = new Date(data.last_updated);
+            ct.setTime(ct.getTime() + ct.getTimezoneOffset() * 60 * 1000);
+            $("#fleet").text(data.title);
+            $("#fc").text(data.fc);
+            $("#upd").text(ct.toLocaleTimeString("en-US", options));
+            $("#mbr").text(data.members);
+            $("#fleet-desc").text(data.description);
         });
+        var tdiv = $("#view-checkpoints-body");
+        $.get("/api/fleet/checkpoint_details", { auth: ft.ident, fleet_id: router.hash[1] }).then(data => {
+            console.log(data);
+
+            var cont = "";
+            for (d of data) {
+                var options = {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    timeZoneName: "short"
+                };
+                var offset = new Date().getTimezoneOffset();
+                var ct = new Date(d.creation_time);
+                ct.setTime(ct.getTime() + ct.getTimezoneOffset() * 60 * 1000);
+                cont += "<tr>";
+                cont += "<td>" + ct.toLocaleTimeString("en-US", options) + "</td>";
+                cont += "<td align='center'>" + d.count + "</td>";
+                cont += "<td>" + d.description + "</td>";
+                cont += "</tr>";
+            }
+            tdiv.html(cont);
+        });
+
+
+
+
+
+
+
     }
 }

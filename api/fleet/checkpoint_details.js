@@ -5,10 +5,10 @@ module.exports.handler = function(req, res, next) {
     if (auth.get(req.params.auth.token) === undefined) {
         res.send({ "valid": false, "msg": "Bad auth token" });
         return next();
+    } else if (req.params.fleet_id === undefined) {
+        res.send({ "valid": false, "msg": "Missing fleet id." });
+        return next();
     } else {
-        if (!req.params.fleet_id)
-            return next(new restify.InvalidArgumentError('Fleet ID required.'));
-
         pg_pool.query("SELECT * from checkpoint_details WHERE fleet_id=$1", [req.params.fleet_id]).then(function(data) {
             res.send(data.rows);
             return next();

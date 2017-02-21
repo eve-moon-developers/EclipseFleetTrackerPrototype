@@ -1,8 +1,57 @@
+<style>
+    #fleet,
+    #fc,
+    #upd,
+    #fleet-desc,
+    #mbr {
+        font-weight: 700;
+    }
+</style>
+
+
+<h1>Fleet Details</h1>
 <div class="row">
-    <div class="twelve columns">Information about the fleet and checkpoints will be found here. </div>
-    <div class="twelve columns">Current fleet data can be found in the console. A view just eneds to be built.</div>
+    <div class="three columns">
+        Fleet</br>
+        <div Id="fleet"></div>
+    </div>
+    <div class="three columns ">
+        Fleet Commander</br>
+        <div id="fc"></div>
+    </div>
+    <div class="three columns ">
+        Updated</br>
+        <div id="upd"></div>
+    </div>
+    <div class="three columns ">
+        Members</br>
+        <div id="mbr"></div>
+    </div>
 </div>
-<div class="row minor-section">
+<div class="row">
+    Fleet Description:</br>
+    <div Id="fleet-desc"></div>
+
+</div>
+
+<div class="row minor-section break-line">
+    <div id="lookat"></div>
+    <table class="u-full-width">
+        <thead>
+            <tr>
+                <th width="30%">Time</th>
+                <th width="10%">Members Added</th>
+                <th width="60%">Checkpoint Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="view-checkpoints-body">
+        </tbody>
+    </table>
+</div>
+
+<div class="row minor-section break-line">
     <div class="three columns">
         <button id="button-delete-fleet" class="u-full-width warn-background warn-strong-text">DELETE FLEET</button>
     </div>
