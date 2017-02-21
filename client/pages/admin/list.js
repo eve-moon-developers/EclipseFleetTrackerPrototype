@@ -61,7 +61,7 @@ router.pages["admin/list"].add_user = function() {
             message += "Eclipse Fleet Tool: https://app3.thebestcorp.org " + username + " " + raw_password + " - Please change your password.";
             message += "<br><br>Click anywhere grey, or the red X to continue.";
             ft.modal.setup("User added!", message);
-            ft.modal.doShow();
+            ft.modal.doShow(true, () => location.reload());
         }).fail(function(xhr, status, error) {
             ft.modal.setup("User was not added!", "The server returned:<br><br>" + xhr.responseText + "<br><br>Click anywhere grey, or the red X to continue.");
             ft.modal.doShow(true, () => location.reload());
@@ -106,9 +106,9 @@ router.pages["admin/list"].update_user = function(id, scope) {
         $.post("api/admin/update/rank", { auth: ft.ident, "user_id": user_id, "rank": rank_val }).done(function() {
             ft.modal.setup("User rank updated!", "User " + me.user_list[id].username + " has had their rank changed to " + rank_val +
                 "<br><br>Close the modal to reload the site.<br>Click anywhere grey, or the red X to continue.");
-            ft.modal.doShow(true, () => location.reload());
+            ft.modal.doShow(true, () => router.reload());
         }).fail(function(xhr, status, error) {
-            ft.modal.setup("Password was not changed!", "The server returned:<br><br>" + xhr.responseText + "<br><br>Click anywhere grey, or the red X to continue.");
+            ft.modal.setup("Rank was not changed!", "The server returned:<br><br>" + xhr.responseText + "<br><br>Click anywhere grey, or the red X to continue.");
             ft.modal.doShow(true, () => location.reload());
         });
     });
@@ -130,7 +130,7 @@ router.pages["admin/list"].update_user = function(id, scope) {
             message += "Eclipse Fleet Tool: https://app3.thebestcorp.org " + me.user_list[id].username + " " + raw_password + " - Please change your password.";
             message += "<br><br>Click anywhere grey, or the red X to continue.";
             ft.modal.setup("Password reset!", message);
-            ft.modal.doShow();
+            ft.modal.doShow(true, () => router.reload());
         }).fail(function(xhr, status, error) {
             ft.modal.setup("User's password was not reset!", "The server returned:<br><br>" + xhr.responseText + "<br><br>Click anywhere grey, or the red X to continue.");
             ft.modal.doShow(true, () => location.reload());
@@ -145,7 +145,7 @@ router.pages["admin/list"].update_user = function(id, scope) {
 
 }
 
-router.pages["admin/list"].delete_user = function(id, scope) {
+router.pages["admin/list"].disable_user = function(id, scope) {
     var me = router.pages["admin/list"];
     ft.modal.setup("Delete user: " + me.user_list[id].username, "This hasn't been implemented.");
     ft.modal.doShow();
@@ -186,9 +186,16 @@ router.pages["admin/list"].handler = function() {
                 me.user_list[d.id] = d;
 
                 cont += "<tr>";
-                cont += "<td>" + d.id + "</td>";
-                cont += "<td>" + d.username + "</td>";
-                cont += "<td>" + d.rank + "</td>";
+
+                if (d.rank === 0) {
+                    cont += "<td class='disabled-cell'>" + d.id + "</td>";
+                    cont += "<td class='disabled-cell'>" + d.username + "</td>";
+                    cont += "<td class='disabled-cell'>" + d.rank + "</td>";
+                } else {
+                    cont += "<td>" + d.id + "</td>";
+                    cont += "<td>" + d.username + "</td>";
+                    cont += "<td>" + d.rank + "</td>";
+                }
 
                 /*
                 if (d.created == null) {
@@ -212,7 +219,14 @@ router.pages["admin/list"].handler = function() {
 
                 if (d.rank < ft.ident.rank) {
                     cont += "<td><button class='u-full-width' onclick='router.pages[\"admin/list\"].update_user(" + d.id + ", this)'>Update</button></td>";
-                    cont += "<td><button class='u-full-width warn-background' onclick='router.pages[\"admin/list\"].delete_user(" + d.id + ", this)'>Delete</button></td>";
+
+                    /*
+                     if (d.rank === 0) {
+                         cont += "<td><button class='u-full-width warn-background' onclick='router.pages[\"admin/list\"].disable_user(" + d.id + ", this)' disabled>Disable</button></td>";
+                     } else {
+                         cont += "<td><button class='u-full-width warn-background' onclick='router.pages[\"admin/list\"].disable_user(" + d.id + ", this)'>Disable</button></td>";
+                     }
+                     */
                 }
                 cont += "</tr>"
             }

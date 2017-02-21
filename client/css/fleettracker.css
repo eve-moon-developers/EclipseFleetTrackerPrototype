@@ -79,6 +79,11 @@ input[type="button"]:disabled {
     border: 1px solid dimgrey;
 }
 
+.disabled-cell {
+    background-color: dimgray;
+    border-color: dimgray;
+}
+
 
 /* Modal */
 

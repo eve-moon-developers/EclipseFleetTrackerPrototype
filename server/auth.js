@@ -148,7 +148,11 @@ module.exports.login = function(auth) {
             if (!valid) {
                 console.log("Rejected login attempt.");
                 return { "valid": false };
+            } else if (res.rows[0].rank === 0) {
+                console.log("Rejected login attempt.");
+                return { "valid": false };
             } else {
+
                 console.log("Accepted login attempt.");
                 var ret = {
                     "valid": true,

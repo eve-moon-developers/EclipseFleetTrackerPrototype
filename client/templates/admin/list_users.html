@@ -4,6 +4,7 @@
         <p>You may add, remove, or update users on this page.</p>
         <div class="warn-weak-text warn-background note-block">
             <div>You may not edit users with an equal or higher rank than you.</div>
+            <div>Set a users rank to 0 to disable their login. Set the rank to greater than 0 to re-enable their login.</div>
             <div>Any actions on this page are final. <span class="warn-strong-text">There are no undo buttons.</span></div>
         </div>
     </div>
@@ -25,7 +26,6 @@
                     <th>Id</th>
                     <th>Username</th>
                     <th>Rank</th>
-                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -71,6 +71,7 @@
         <span class="three columns">Update user rank:</span>
         <input class="five columns" type="number" placeholder="Rank " id="update-user-rank" tabindex="103" min="0" max="10" required>
         <button class='four columns' id="update-user-rank-button" disabled>SUBMIT</button>
+        <p>Set user rank to 0 to disable their account.</p>
     </div>
     <div class="row minor-section break-line">
         <button class='five columns' id="unlock-reset-user-password-button">RESET PASSWORD</button>
