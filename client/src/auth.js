@@ -24,6 +24,7 @@ function validate_auth_token() {
 }
 
 function load_login() {
+    ft.page.section.nav.hide();
     $.getScript('/deps/bcrypt.min.js').then(function() {
         return $.get("/login.html", function(data) {
             ft.templates.login = data;

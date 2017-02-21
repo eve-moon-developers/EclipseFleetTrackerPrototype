@@ -25,7 +25,6 @@
                     <th>Id</th>
                     <th>Username</th>
                     <th>Rank</th>
-                    <th>Created</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -37,13 +36,9 @@
 </div>
 <div class="container sub-panel u-full-width" id="add-new-user-template" hidden>
     <div class="row">
-        <div class="four columns">
+        <div class="eight columns">
             <label for="newUserInputUsername">Username</label>
             <input class="u-full-width" type="text" placeholder="Username" id="newUserInputUsername" tabindex="101" maxlength="64" required>
-        </div>
-        <div class="four columns">
-            <label for="newUserInputPassword">Password</label>
-            <input class="u-full-width" type="text" placeholder="Password" id="newUserInputPassword" tabindex="102" maxlength="64" required>
         </div>
         <div class="four columns ">
             <label for="newUserInputRank ">Rank</label>
@@ -51,6 +46,7 @@
         </div>
     </div>
     <div class="row mini-space">
+        <div class="six columns">* Password automatically generated.</div>
         <div class="six columns u-pull-right ">
             <button submit class="u-full-width " onclick="router.pages['admin/list'].add_user(); ">Submit</button>
         </div>
@@ -64,7 +60,12 @@
                 <li>Below 10 can update any fleet, and delete their own fleet.</li>
                 <li>10 can delete any fleet and edit users.</li>
             </ul>
-            <h2>This does not work atm.</h5>
         </div>
+    </div>
+</div>
+<div id="update-user-template" hidden>
+    <div class="row">
+        <h5 class="eight columns">Reset user password: </h5>
+        <button class='u-pull-right four columns warn-background warn-strong-text'>RESET PASSWORD</button>
     </div>
 </div>

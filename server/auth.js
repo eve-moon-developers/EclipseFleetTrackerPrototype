@@ -23,26 +23,46 @@ module.exports.start_auth = function() {
         AuthCache.set("dev-auth-token", {
             "valid": true,
             "ident": "MOON Developer",
-            "id": 1,
+            "id": 0,
             "rank": 10,
             "token": "dev-auth-token"
-        });
+        }, 0);
+        IDCache.set(0, "dev-auth-token");
     }
 };
 
 module.exports.get = function(token) {
-    var auth = AuthCache.get(token);
-    if (auth === undefined) {
-        return auth;
-    } else {
-        //Now we need to handle updating the database.
-        //This includes revoking permissions and bullshit like that.
-        return auth;
-    }
+    return AuthCache.get(token);
 }
 
 module.exports.expire = function(user_id) {
 
+    if (user_id === 1 && process.env.DEBUG_AUTH === "TRUE") {
+        return;
+    }
+
+    var token = IDCache.get(user_id);
+    IDCache.del(user_id);
+    AuthCache.del(token);
+}
+
+module.exports.expire_all = function() {
+    AuthCache.flushAll();
+}
+
+module.exports.change_password = function(user_id, new_password) {
+    module.exports.expire(user_id);
+    //Insert the dev token.
+    if (process.env.DEBUG_AUTH === "TRUE") {
+        AuthCache.set("dev-auth-token", {
+            "valid": true,
+            "ident": "MOON Developer",
+            "id": 1,
+            "rank": 10,
+            "token": "dev-auth-token"
+        });
+        IDCache.set(1, "dev-auth-token");
+    }
 }
 
 module.exports.login = function(auth) {

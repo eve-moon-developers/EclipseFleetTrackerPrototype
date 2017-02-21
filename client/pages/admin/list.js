@@ -29,7 +29,10 @@ router.pages["admin/list"].add_user = function() {
 
 router.pages["admin/list"].update_user = function(id, scope) {
     var me = router.pages["admin/list"];
-    ft.modal.setup("Update user: " + me.user_list[id].username, "This hasn't been implemented.");
+
+    var content = $("#update-user-template").html();
+
+    ft.modal.setup("Update user: " + me.user_list[id].username, content);
     ft.modal.doShow();
 }
 
@@ -78,6 +81,7 @@ router.pages["admin/list"].handler = function() {
                 cont += "<td>" + d.username + "</td>";
                 cont += "<td>" + d.rank + "</td>";
 
+                /*
                 if (d.created == null) {
                     cont += "<td>&#x221e;</td>"
                 } else {
@@ -95,6 +99,7 @@ router.pages["admin/list"].handler = function() {
                         cont += "<td>" + Math.floor(seconds / 86400) + "d</td>";
                     }
                 }
+                */
 
                 if (d.rank < ft.ident.rank) {
                     cont += "<td><button class='u-full-width' onclick='router.pages[\"admin/list\"].update_user(" + d.id + ", this)'>Update</button></td>";

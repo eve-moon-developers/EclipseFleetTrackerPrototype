@@ -1,4 +1,7 @@
-<button class='u-full-width warn-background warn-strong-text' onclick='router.pages["dashboard"].change_password()'>Reset Password</button>
+<div class=row>
+    <button class='six columns warn-background warn-strong-text' onclick='router.pages["dashboard"].change_password()'>Change Password</button>
+    <button class='six columns u-pull-right warn-background warn-strong-text' onclick='router.pages["dashboard"].log_out()'>Log Out</button>
+</div>
 <div class="row break-line mini-space">
     <h3 class="twelve columns">Fleet Tool Basics - 2 Steps</h3>
     <div class="twelve columns">This is a basic introduction for how to create and update a fleet.</div>
@@ -45,5 +48,28 @@
             </li>
             <li>Look over the information and press Submit</li>
         </ol>
+    </div>
+</div>
+<div id="change-password-template" hidden>
+    <div class="row">
+        <label for="change-password-input">Please enter a new password:</label>
+        <input class="u-full-width" type="password" placeholder="New Password" id="change-password-input" tabindex="101" maxlength="64">
+    </div>
+    <div class="row">
+        <label for="change-password-input-confirm">Please enter your password again:</label>
+        <input class="u-full-width" type="password" placeholder="New Password" id="change-password-input-confirm" tabindex="101" maxlength="64">
+    </div>
+    <div class="row mini-space">
+        <span id="change-password-message">Error has occured! Please refresh the page.</span>
+        <button class='u-pull-right u-pull-right four columns warn-background warn-strong-text' id="change-password-submit-button" onclick='router.pages["dashboard"].submit_change_password()'>SUBMIT</div>
+    </div>
+</div>
+<div id="log-out-template" hidden>
+    <div class="row">
+        <h5>Are you sure you want to log out?</h5>
+    </div>
+    <div class="row">
+        <button class='u-pull-left four columns' onclick='ft.modal.doSafeClose();'>No, I love your tool!</button>
+        <button class='u-pull-right four columns warn-background warn-strong-text' onclick='localStorage.clear("EclipseFleetTrackerAuthToken"); ft.modal.doSafeClose(); load_login();'>Yes, I hate your tool.</button>
     </div>
 </div>

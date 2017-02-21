@@ -27,6 +27,8 @@ router.pages["fleets/list"].handler = function() {
                 cont += "<td>" + d.title + "</td>";
                 cont += "<td>" + d.fc + "</td>";
 
+                /*
+
                 if (d.last_updated == null) {
                     cont += "<td>&#x221e;</td>"
                 } else {
@@ -44,6 +46,7 @@ router.pages["fleets/list"].handler = function() {
                         cont += "<td>" + Math.floor(seconds / 86400) + "d</td>";
                     }
                 }
+                */
                 cont += "<td>" + d.members + "</td>";
                 cont += "<td>" + d.checkpoints + "</td>";
                 cont += "<td><button onclick=router.load('#fleets/view$" + d.id +
