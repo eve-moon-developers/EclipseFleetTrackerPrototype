@@ -37,7 +37,7 @@ router.pages["fleets/view"].handler = function() {
             $("#fc").text(data.fc);
             $("#upd").text(ct.toLocaleTimeString("en-US", options));
             $("#mbr").text(data.members);
-            $("#fleet-desc").text(data.description);
+            $("#fleet-desc").text(unescape(data.description));
         });
         var tdiv = $("#view-checkpoints-body");
         $.get("/api/fleet/checkpoint_details", { auth: ft.ident, fleet_id: router.hash[1] }).then(data => {
