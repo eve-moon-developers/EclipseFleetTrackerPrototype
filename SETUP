@@ -9,3 +9,4 @@ Remember that if you update the client files, you only need to do a hard fresh o
 
 HOWEVER
 If you update the server (node js stuff in api, ops, or server) you need to restart the server.
+    * See readme for more information. You do not need to reload if you have it enabled and only edit api endpoints.
