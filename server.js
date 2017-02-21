@@ -7,7 +7,7 @@ if (process.argv.length == 2) {
         require("server/auth.js").start_auth();
         require("server/content.js").start_content();
 
-        require("api/routes.js").register();
+        require("api/add_routes.js").register();
 
         require("server/content.js").serve_content();
     });
